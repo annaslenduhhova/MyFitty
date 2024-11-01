@@ -1,0 +1,1 @@
+connectionUrl=jdbc:sqlserver://localhost:1433;database=simulabdb;user=sa;password=Pwd1234.;encrypt=false;loginTimeout=10;

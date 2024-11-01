@@ -4,17 +4,30 @@
  */
 package slenduhhova.myfitty;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author annas
  */
 public class Main extends javax.swing.JFrame {
+    
+    private MainAfterLogin mainAfterLogin;
+    private MainBeforeLogin mainBeforeLogin;
 
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+        this.setSize(400,450);
+        this.setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/images/icono.png")).getImage());
+        mainBeforeLogin = new MainBeforeLogin(this);
+       // mainBeforeLogin.setBounds(40,40,320,350);
+        mainAfterLogin = new MainAfterLogin(this);
+        getContentPane().add(mainBeforeLogin);  
+          
     }
 
     /**
@@ -27,21 +40,25 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+         
+    public void switchBeforeLoginToAfterLogin(String name) {
+        mainBeforeLogin.setVisible(false);       
+        getContentPane().add(mainAfterLogin);
+        mainAfterLogin.getjLabelWelcomeNameOfInstructor().setText(name);
+        mainAfterLogin.setVisible(true);
+
+        revalidate();
+        repaint();
+  
+    }
+    
     /**
      * @param args the command line arguments
      */
