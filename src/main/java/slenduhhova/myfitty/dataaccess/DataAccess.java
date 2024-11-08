@@ -46,7 +46,7 @@ public class DataAccess {
                 user.setNom(resultSet.getString("Nom"));
                 user.setEmail(resultSet.getString("Email"));
                 user.setPasswordHash(resultSet.getString("PasswordHash"));
-                user.setInstructor(resultSet.getBoolean("Instructor"));
+                user.setInstructor(resultSet.getBoolean("Instructor"));              
             }
             selectStatement.close();
             connection.close();
@@ -100,10 +100,9 @@ public class DataAccess {
                 user.setEmail(resultSet.getString("Email"));
                 user.setPasswordHash(resultSet.getString("PasswordHash"));
                 user.setInstructor(resultSet.getBoolean("Instructor"));
+                user.setAssignedInstructor(resultSet.getInt("AssignedInstructor"));
                 usuaris.add(user);
             }
-            selectStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -126,6 +125,7 @@ public class DataAccess {
                 workout.setId(resultSet.getInt("Id"));
                 workout.setForDate(resultSet.getString("ForDate"));
                 workout.setUserId(resultSet.getInt("UserId"));
+                workout.setComments(resultSet.getString("Comments"));             
 
                 workouts.add(workout);
             }

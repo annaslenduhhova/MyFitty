@@ -42,4 +42,9 @@ public class Exercici {
     public void setDemoFoto(String DemoFoto) {
         this.DemoFoto = DemoFoto;
     }
+    
+    @Override
+    public String toString() {
+        return "Nombre de ejercicio: " + NomExercici + "\n" + "Descripción: " + Descripcio + "\n" + "Foto: " + DemoFoto + "\n";
+    }
 }

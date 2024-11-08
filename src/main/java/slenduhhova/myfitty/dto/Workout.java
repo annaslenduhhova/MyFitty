@@ -42,4 +42,9 @@ public class Workout {
     public void setComments(String Comments) {
         this.Comments = Comments;
     }
+    
+    @Override
+    public String toString() {
+        return String.valueOf(Id);
+    }  
 }

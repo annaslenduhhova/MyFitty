@@ -78,4 +78,10 @@ public class Usuari {
     public void setAssignedInstructor(int AssignedInstructor) {
         this.AssignedInstructor = AssignedInstructor;
     }
+    
+    @Override
+    public String toString() {
+        return Nom;
+    }
+
 }
