@@ -12,32 +12,25 @@ import java.net.URL;
  * @author annas
  */
 
-public class MainBeforeLogin extends javax.swing.JPanel {
+    class MainBeforeLogin extends javax.swing.JPanel {
     
-    Main main;
+    private Main main;
     
     public MainBeforeLogin(Main main) {
         this.main=main;
         initComponents();
-        setSize(800, 600); 
+        setSize(800, 500); 
         setBackground(new Color(240, 240, 240));
-        int iconWidth = 158;
-        int iconHeight = 160;
-        int iconX = (getWidth() - iconWidth) / 2;  
-        int iconY = 100;  
-        jLabelIcon.setBounds(iconX, iconY, iconWidth, iconHeight);
+        int iconX = (getWidth() - 158) / 2;   
+        jLabelIcon.setBounds(iconX, 100, 158, 160);
         
-        int linkWidth = 110;
-        int linkHeight = 22;
-        int linkX = (getWidth() - linkWidth) / 2; 
-        int linkY = iconY + iconHeight + 40;  
-        jLabelHyperlink.setBounds(linkX, linkY, linkWidth, linkHeight);
+        int linkX = (getWidth() - 110) / 2;  
+        jLabelHyperlink.setBounds(linkX, 300, 110, 22);
         
-        int buttonWidth = 117;
-        int buttonHeight = 47;
-        int buttonX = (getWidth() - buttonWidth) / 2; 
-        int buttonY = linkY + linkHeight + 50;  
-        jButtonGoToLoginDialog.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
+        int buttonX = (getWidth() - 117) / 2; 
+        jButtonGoToLoginDialog.setBounds(buttonX, 368, 117, 47);
+        jButtonRegisterUser.setBounds(333,460, 130, 30);
+       
     }
 
     @SuppressWarnings("unchecked")        
@@ -47,6 +40,7 @@ public class MainBeforeLogin extends javax.swing.JPanel {
         jLabelIcon = new javax.swing.JLabel();
         jLabelHyperlink = new javax.swing.JLabel();
         jButtonGoToLoginDialog = new javax.swing.JButton();
+        jButtonRegisterUser = new javax.swing.JButton();
 
         setAlignmentX(0.0F);
         setPreferredSize(new java.awt.Dimension(320, 350));
@@ -85,11 +79,20 @@ public class MainBeforeLogin extends javax.swing.JPanel {
         });
         add(jButtonGoToLoginDialog);
         jButtonGoToLoginDialog.setBounds(134, 270, 117, 47);
+
+        jButtonRegisterUser.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonRegisterUser.setText("Register user");
+        jButtonRegisterUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegisterUserActionPerformed(evt);
+            }
+        });
+        add(jButtonRegisterUser);
+        jButtonRegisterUser.setBounds(120, 350, 140, 30);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGoToLoginDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGoToLoginDialogActionPerformed
-        main.getLogin().setVisible(true);
-       
+        main.getLogin().setVisible(true);       
     }//GEN-LAST:event_jButtonGoToLoginDialogActionPerformed
 
     private void jLabelHyperlinkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHyperlinkMouseClicked
@@ -106,10 +109,15 @@ public class MainBeforeLogin extends javax.swing.JPanel {
     private void jLabelHyperlinkMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHyperlinkMouseExited
         jLabelHyperlink.setText("www.fitty.com");
     }//GEN-LAST:event_jLabelHyperlinkMouseExited
+
+    private void jButtonRegisterUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterUserActionPerformed
+        main.getNewUser().setVisible(true);
+    }//GEN-LAST:event_jButtonRegisterUserActionPerformed
                                         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonGoToLoginDialog;
+    private javax.swing.JButton jButtonRegisterUser;
     private javax.swing.JLabel jLabelHyperlink;
     private javax.swing.JLabel jLabelIcon;
     // End of variables declaration//GEN-END:variables

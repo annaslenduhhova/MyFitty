@@ -3,14 +3,21 @@ package slenduhhova.myfitty;
 import java.awt.Color;
 import java.util.List;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerDateModel;
 import slenduhhova.myfitty.dataaccess.DataAccess;
 import slenduhhova.myfitty.dto.Exercici;
+import slenduhhova.myfitty.dto.Usuari;
 import slenduhhova.myfitty.dto.Workout;
 
 /**
@@ -18,26 +25,29 @@ import slenduhhova.myfitty.dto.Workout;
  * @author annas
  */
 
-public class CreateWorkouts extends javax.swing.JPanel {
-
-    /**
-     * Creates new form CreateWorkouts
-     */
-    
+    class CreateWorkouts extends javax.swing.JPanel {
+     
+    private MainAfterLogin mainAfterLogin;
     private JList<Integer> jListExercises;
-    ArrayList<Exercici> exercicis;
-    
-    public CreateWorkouts() {
-        initComponents();
-        setSize(300, 450);
+    private ArrayList<Exercici> exercicis;
+    private JComboBox<Usuari> jComboBoxShowAllUsers;
+   
+    public CreateWorkouts(MainAfterLogin mainAfterLogin) {
+        this.mainAfterLogin = mainAfterLogin;
+        initComponents();        
+        setSize(300, 440);
         setBackground(new Color(240, 240, 240));
         
         jListExercises = new JList<>();
         jListExercises.setLayoutOrientation(JList.VERTICAL_WRAP);
-        jListExercises.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jListExercises.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);       
         jScrollPaneExcercises.setViewportView(jListExercises);
         
-        fillListExcercises();        
+        jComboBoxShowAllUsers = new JComboBox<>();
+        jScrollPaneUserName.setViewportView(jComboBoxShowAllUsers);
+        
+        setSpinnerDate();            
+        fillListExcercises();
     }
 
     @SuppressWarnings("unchecked")
@@ -48,12 +58,12 @@ public class CreateWorkouts extends javax.swing.JPanel {
         jLabelName = new javax.swing.JLabel();
         jLabelDate = new javax.swing.JLabel();
         jLabelExcercises = new javax.swing.JLabel();
-        jTextUser = new javax.swing.JTextField();
-        jTextDate = new javax.swing.JTextField();
         jScrollPaneExcercises = new javax.swing.JScrollPane();
         jScrollPaneComments = new javax.swing.JScrollPane();
         jTextAreaComments = new javax.swing.JTextArea();
         jButtonCreateWorkout = new javax.swing.JButton();
+        jScrollPaneUserName = new javax.swing.JScrollPane();
+        jSpinnerDate = new javax.swing.JSpinner();
 
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -96,68 +106,72 @@ public class CreateWorkouts extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelDate, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextDate, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPaneExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jScrollPaneComments, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabelUser, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jScrollPaneUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelDate, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSpinnerDate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPaneExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPaneComments, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabelUser, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextUser, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(72, 72, 72))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(jButtonCreateWorkout, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(103, 103, 103)
+                        .addComponent(jButtonCreateWorkout, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextDate, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jSpinnerDate))
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelUser, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(jScrollPaneUserName))
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneComments, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(jLabelExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, Short.MAX_VALUE)
-                        .addComponent(jScrollPaneExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)))
-                .addComponent(jButtonCreateWorkout, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                        .addComponent(jLabelExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPaneExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addComponent(jButtonCreateWorkout)
+                .addGap(17, 17, 17))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCreateWorkoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateWorkoutActionPerformed
-        insertWorkout();
-        JOptionPane.showMessageDialog(null, "New workouts is added successfully!", "Workout", JOptionPane.PLAIN_MESSAGE);
+        try{
+            insertWorkout();       
+            JOptionPane.showMessageDialog(null, "New workout is added successfully!", "Workout", JOptionPane.PLAIN_MESSAGE);
+            mainAfterLogin.createWorkout();
+        }catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "The date format is incorrect.", "Date Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "An unexpected error occurred. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }        
     }//GEN-LAST:event_jButtonCreateWorkoutActionPerformed
 
 
@@ -169,16 +183,17 @@ public class CreateWorkouts extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelUser;
     private javax.swing.JScrollPane jScrollPaneComments;
     private javax.swing.JScrollPane jScrollPaneExcercises;
+    private javax.swing.JScrollPane jScrollPaneUserName;
+    private javax.swing.JSpinner jSpinnerDate;
     private javax.swing.JTextArea jTextAreaComments;
-    private javax.swing.JTextField jTextDate;
-    private javax.swing.JTextField jTextUser;
     // End of variables declaration//GEN-END:variables
 
 
     private Workout createWorkout(){
 
         String date = formatDate();
-        int idUser = Integer.valueOf(jTextUser.getText());
+        Usuari selectedUser = (Usuari) jComboBoxShowAllUsers.getSelectedItem();
+        int idUser = selectedUser.getId();
         String comments = jTextAreaComments.getText();
         
         Workout workout = new Workout();
@@ -191,20 +206,25 @@ public class CreateWorkouts extends javax.swing.JPanel {
 
     private String formatDate(){
 
-        String dateToFormat = jTextDate.getText();
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDateTime localDateTime;
-        localDateTime = LocalDateTime.parse(dateToFormat + " 00:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        Date selectedDate = (Date) jSpinnerDate.getValue();
+        LocalDateTime localDateTime = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         DateTimeFormatter sqlFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSS");
         String formattedDateForSQL = localDateTime.format(sqlFormatter);
 
-    return formattedDateForSQL;
+        return formattedDateForSQL;
+    } 
+    
+    public void fillComboBoxUsers(int id){
+        
+        ArrayList<Usuari> usuaris = DataAccess.getAllUsersByInstructor(id);       
+        for (Usuari usuari : usuaris) {
+            jComboBoxShowAllUsers.addItem(usuari);
+        }                
     }
-                     
+    
     private void fillListExcercises(){
         
-        DataAccess da = new DataAccess();
-        exercicis = da.getAllExercicis();        
+        exercicis = DataAccess.getAllExercicis();        
         DefaultListModel<Integer> model = new DefaultListModel<>();
         for (Exercici exercici : exercicis) {
             model.addElement(exercici.getId());
@@ -213,9 +233,15 @@ public class CreateWorkouts extends javax.swing.JPanel {
         jListExercises.setModel(model);         
     }
     
-    private void insertWorkout(){    
+    private void setSpinnerDate(){
         
-        DataAccess da = new DataAccess();       
+        jSpinnerDate.setModel(new SpinnerDateModel());
+        JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(jSpinnerDate, "dd/MM/yyyy");
+        jSpinnerDate.setEditor(dateEditor); 
+    }
+    
+    private void insertWorkout(){    
+              
         ArrayList<Exercici> selectedExercises = new ArrayList<>();   
         List<Integer> selectedIds = jListExercises.getSelectedValuesList();
     
@@ -224,6 +250,6 @@ public class CreateWorkouts extends javax.swing.JPanel {
                 selectedExercises.add(exercici);
             }
         }    
-        da.insertWorkout(createWorkout(), selectedExercises);      
+        DataAccess.insertWorkout(createWorkout(), selectedExercises);      
     }
 }

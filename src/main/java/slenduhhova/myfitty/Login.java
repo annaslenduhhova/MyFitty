@@ -4,6 +4,7 @@ package slenduhhova.myfitty;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import slenduhhova.myfitty.dataaccess.DataAccess;
 import slenduhhova.myfitty.dto.Usuari;
 
@@ -12,11 +13,9 @@ import slenduhhova.myfitty.dto.Usuari;
  * @author annas
  */
 
-public class Login extends javax.swing.JDialog {
+    class Login extends javax.swing.JDialog {
     
-    Main main;
-    MainAfterLogin mainAfterLogin;
-    int idLoggedInstructor;
+    private Main main;
     
     public Login(Main main) {
         super(main, true);
@@ -25,8 +24,7 @@ public class Login extends javax.swing.JDialog {
         setIconImage(new ImageIcon(getClass().getResource("/images/icono.png")).getImage());
         setSize(310,240);
         setLocationRelativeTo(main); 
-        getContentPane().setBackground(new Color(240, 240, 240));
-        mainAfterLogin = new MainAfterLogin(main);
+        getContentPane().setBackground(new Color(240, 240, 240));            
     }
 
     @SuppressWarnings("unchecked")
@@ -42,10 +40,10 @@ public class Login extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
 
-        jLabelEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelEmail.setText("Email:");
 
-        jLabelPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelPassword.setText("Password:");
 
         jTextFieldEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -76,12 +74,12 @@ public class Login extends javax.swing.JDialog {
                             .addComponent(jLabelPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldEmail)
-                            .addComponent(jPasswordFieldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)))
+                            .addComponent(jPasswordFieldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                            .addComponent(jTextFieldEmail)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(jButtonEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,22 +112,24 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldEmail;
     // End of variables declaration//GEN-END:variables
 
-    public int jButtonEnter() {
-        DataAccess da = new DataAccess();
-        Usuari usuari = da.getUser(jTextFieldEmail.getText());
-        int idInstructor = 0;
-        if(usuari != null){
+    public void jButtonEnter() {
+        Usuari usuari = DataAccess.getUser(jTextFieldEmail.getText());
+        if(usuari != null){ 
             char[] passwordToVerify = jPasswordFieldPassword.getPassword();
             String userPasswordHashInDatabase = usuari.getPasswordHash();
-            var result = BCrypt.verifyer().verify(passwordToVerify,userPasswordHashInDatabase);
-            if(result.verified){
-                setVisible(false);               
-                main.switchBeforeLoginToAfterLogin("Welcome, " + usuari.getNom() + "!");
-                idLoggedInstructor = usuari.getId();
-            }else{
-                System.out.println("Credentials are not correct.");
-            }           
-        }
-        return idLoggedInstructor; 
-    }   
+            if (userPasswordHashInDatabase != null) {
+                var result = BCrypt.verifyer().verify(passwordToVerify,userPasswordHashInDatabase);
+                if(result.verified){
+                    setVisible(false); 
+                    main.setId(usuari.getId());
+                    main.switchBeforeLoginToAfterLogin("Welcome, " + usuari.getNom() + "!");
+                    
+                }else{               
+                    JOptionPane.showMessageDialog(null, "Password is not correct.", "Login", JOptionPane.PLAIN_MESSAGE);
+                }
+            }else {
+                JOptionPane.showMessageDialog(null, "Email is not correct.", "Login", JOptionPane.PLAIN_MESSAGE);
+            }
+        }          
+    }    
 }

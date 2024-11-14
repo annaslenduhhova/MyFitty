@@ -2,6 +2,7 @@
 package slenduhhova.myfitty.dataaccess;
 
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
+import javax.swing.JOptionPane;
 import slenduhhova.myfitty.dto.Exercici;
 import slenduhhova.myfitty.dto.Usuari;
 import slenduhhova.myfitty.dto.Workout;
@@ -18,13 +20,14 @@ import slenduhhova.myfitty.dto.Workout;
  *
  * @author anna
  */
-public class DataAccess {
+
+    public class DataAccess {
 
     private static Connection getConnection() {
         Connection connection = null;
         Properties properties = new Properties();
         try {
-            properties.load(DataAccess.class.getClassLoader().getResourceAsStream("properties/application.properties.txt"));                      
+            properties.load(DataAccess.class.getClassLoader().getResourceAsStream("properties/application.properties"));                      
             String connectionUrl = properties.getProperty("connectionUrl");
             connection = DriverManager.getConnection(connectionUrl);                            
         }catch (Exception e) {
@@ -168,7 +171,7 @@ public class DataAccess {
 
     public static ArrayList<Exercici> getAllExercicis() {
         ArrayList<Exercici> exercicis = new ArrayList<>();
-        String sql = "SELECT Id, Exercicis.NomExercici, Exercicis.Descripcio, Exercicis.DemoFoto"
+        String sql = "SELECT Exercicis.Id, Exercicis.NomExercici, Exercicis.Descripcio, Exercicis.DemoFoto"
                 + " FROM Exercicis";
         try (Connection connection = getConnection(); 
             PreparedStatement selectStatement = connection.prepareStatement(sql);) {
@@ -198,17 +201,21 @@ public class DataAccess {
                 + " SELECT CAST(SCOPE_IDENTITY() as int)";
         try (Connection conn = getConnection(); 
             PreparedStatement insertStatement = conn.prepareStatement(sql)) {
+            
             insertStatement.setString(1, u.getNom());
             insertStatement.setString(2, u.getEmail());
             insertStatement.setString(3, u.getPasswordHash());
             insertStatement.setBoolean(4, u.isInstructor());
 
-            int newUserId = insertStatement.executeUpdate();
+           ResultSet rs = insertStatement.executeQuery();
+
+            if (rs.next()) {
+                int newUserId = rs.getInt(1);  
+                return newUserId;
+            }
             
             insertStatement.close();
-            conn.close();
-            
-            return newUserId;
+            conn.close();                    
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -275,4 +282,145 @@ public class DataAccess {
         }
         return 0;
     }
+    
+    public static boolean updateExerciciNom(int id, String nuevoNombre) {
+        String sql = "UPDATE Exercicis SET NomExercici = ? WHERE Id = ?";
+        try (Connection connection = getConnection(); 
+             PreparedStatement updateStatement = connection.prepareStatement(sql)) {
+
+            updateStatement.setString(1, nuevoNombre);
+            updateStatement.setInt(2, id);
+
+            int rowsUpdated = updateStatement.executeUpdate();
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    } 
+    
+    public static boolean updateExerciciDescripcio(int id, String nuevaDescripcion) {
+        String sql = "UPDATE Exercicis SET Descripcio = ? WHERE Id = ?";
+        try (Connection connection = getConnection(); 
+             PreparedStatement updateStatement = connection.prepareStatement(sql)) {
+
+            updateStatement.setString(1, nuevaDescripcion);
+            updateStatement.setInt(2, id);
+
+            int rowsUpdated = updateStatement.executeUpdate();
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public static boolean updateExerciciFoto(int id, String nuevaFoto) {
+        String sql = "UPDATE Exercicis SET DemoFoto = ? WHERE Id = ?";
+        try (Connection connection = getConnection(); 
+             PreparedStatement updateStatement = connection.prepareStatement(sql)) {
+
+            updateStatement.setString(1, nuevaFoto);
+            updateStatement.setInt(2, id);
+
+            int rowsUpdated = updateStatement.executeUpdate();
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public static boolean deleteExercici(int exerciciId) {
+        if (isExerciciAssignedToWorkout(exerciciId)) { 
+            return false;  
+        }       
+    
+        boolean relacionesEliminadas = deleteExerciciFromWorkouts(exerciciId);
+
+        if (relacionesEliminadas) {
+            boolean ejercicioEliminado = deleteFromExercici(exerciciId);
+            return ejercicioEliminado;
+        }
+        return false;
+    }
+    
+    private static boolean deleteExerciciFromWorkouts(int exerciciId) {
+        String sqlCheck = "SELECT COUNT(*) FROM dbo.ExercicisWorkouts WHERE IdExercici = ?";
+        String sqlDelete = "DELETE FROM dbo.ExercicisWorkouts WHERE IdExercici = ?";
+
+        try (Connection conn = getConnection(); 
+            PreparedStatement checkStatement = conn.prepareStatement(sqlCheck);
+            PreparedStatement deleteStatement = conn.prepareStatement(sqlDelete)) {
+
+            checkStatement.setInt(1, exerciciId);
+            ResultSet resultSet = checkStatement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                if (count == 0) {
+                    return true; 
+                }
+            }
+
+        deleteStatement.setInt(1, exerciciId);
+        int rowsAffected = deleteStatement.executeUpdate();
+        return rowsAffected > 0; 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false; 
+    }
+    
+    private static boolean deleteFromExercici(int exerciciId) {
+        String sql = "DELETE FROM dbo.Exercicis WHERE Id = ?";
+        try (Connection conn = getConnection(); PreparedStatement deleteStatement = conn.prepareStatement(sql)) {
+            deleteStatement.setInt(1, exerciciId);
+            int rowsAffected = deleteStatement.executeUpdate();
+            return rowsAffected > 0;  
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false; 
+    }
+    
+    private static boolean isExerciciAssignedToWorkout(int exerciciId) {
+        String sql = "SELECT COUNT(*) FROM dbo.ExercicisWorkouts WHERE IdExercici = ?";
+        try (Connection conn = getConnection(); PreparedStatement checkStatement = conn.prepareStatement(sql)) {
+            checkStatement.setInt(1, exerciciId);
+            ResultSet resultSet = checkStatement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;  
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;  
+    }
+    
+    public static int addNewExercise(Exercici e){      
+        String sql = "INSERT INTO dbo.Exercicis (NomExercici, Descripcio, DemoFoto)"
+                + " VALUES (?,?,?)"
+                + " SELECT CAST(SCOPE_IDENTITY() as int)";
+        try (Connection conn = getConnection(); 
+            PreparedStatement insertStatement = conn.prepareStatement(sql)) {
+            insertStatement.setString(1, e.getNomExercici());
+            insertStatement.setString(2, e.getDescripcio());
+            insertStatement.setString(3, e.getDemoFoto());
+
+            ResultSet rs = insertStatement.executeQuery();
+
+            if (rs.next()) {
+                int newExerciciId = rs.getInt(1);  
+                return newExerciciId;
+            }
+            
+        } catch (SQLException s) {
+            s.printStackTrace();
+        }
+        return 0;
+    }   
 }

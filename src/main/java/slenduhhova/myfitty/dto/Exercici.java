@@ -45,6 +45,6 @@ public class Exercici {
     
     @Override
     public String toString() {
-        return "Nombre de ejercicio: " + NomExercici + "\n" + "Descripción: " + Descripcio + "\n" + "Foto: " + DemoFoto + "\n";
+        return NomExercici + "  \"" + Descripcio + "\"  " + DemoFoto;
     }
 }
