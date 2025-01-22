@@ -50,8 +50,8 @@ import slenduhhova.myfitty.dto.Workout;
         jScrollPaneListUsers.setBounds(60, 140 ,130, 70);
         jScrollPaneListWorkouts.setBounds(210, 140, 55, 70);
         jScrollPaneWorkoutDetails.setBounds(30, 235, 260, 130);
-        jButtonCreateWorkout.setBounds(305, 110, 135, 27);
-        jButtonManageExercises.setBounds(305, 155, 135, 27);
+        jButtonCreateWorkout.setBounds(305, 110, 145, 27);
+        jButtonManageExercises.setBounds(305, 155, 145, 27);
         createWorkouts.setBounds(455, 85, 295, 440);
         manageExercises.setBounds(455, 85, 295, 440);
         createExercise.setBounds(455, 85, 295, 440);
@@ -104,7 +104,6 @@ import slenduhhova.myfitty.dto.Workout;
 
         jButtonShowListOfUsers.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButtonShowListOfUsers.setText("Show all users");
-        jButtonShowListOfUsers.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButtonShowListOfUsers.setFocusPainted(false);
         jButtonShowListOfUsers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +111,7 @@ import slenduhhova.myfitty.dto.Workout;
             }
         });
         add(jButtonShowListOfUsers);
-        jButtonShowListOfUsers.setBounds(136, 81, 106, 21);
+        jButtonShowListOfUsers.setBounds(126, 81, 140, 24);
         add(jScrollPaneListUsers);
         jScrollPaneListUsers.setBounds(104, 126, 126, 65);
         add(jScrollPaneListWorkouts);

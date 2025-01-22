@@ -52,7 +52,7 @@ import slenduhhova.myfitty.dto.Usuari;
         jButtonEnter.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jButtonEnter.setText("ENTER");
         jButtonEnter.setActionCommand("Enter");
-        jButtonEnter.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonEnter.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonEnter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEnterActionPerformed(evt);

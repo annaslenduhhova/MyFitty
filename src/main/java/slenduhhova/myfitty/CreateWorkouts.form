@@ -3,8 +3,8 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-      <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
-        <BevelBorder/>
+      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+        <LineBorder/>
       </Border>
     </Property>
   </Properties>
@@ -33,22 +33,24 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPaneExcercises" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="jLabelName" min="-2" pref="85" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Component id="jScrollPaneComments" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelUser" alignment="1" min="-2" pref="85" max="-2" attributes="0"/>
+                                      <Component id="jLabelDate" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabelUser" min="-2" pref="85" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPaneUserName" min="-2" pref="100" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabelDate" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jSpinnerDate" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jScrollPaneComments" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <Component id="jScrollPaneUserName" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabelCalendario" min="-2" pref="82" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButtonCalendario" min="-2" pref="31" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -57,7 +59,7 @@
                       <Component id="jButtonCreateWorkout" min="-2" pref="109" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="72" max="32767" attributes="0"/>
+              <EmptySpace pref="70" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -65,24 +67,26 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabelDate" pref="31" max="32767" attributes="0"/>
-                  <Component id="jSpinnerDate" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelDate" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="jButtonCalendario" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="jLabelCalendario" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabelUser" pref="33" max="32767" attributes="0"/>
                   <Component id="jScrollPaneUserName" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                       <Component id="jLabelName" min="-2" pref="33" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPaneComments" min="-2" pref="68" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -92,7 +96,7 @@
                   </Group>
                   <Component id="jScrollPaneExcercises" min="-2" pref="62" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="73" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jButtonCreateWorkout" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
@@ -106,7 +110,7 @@
           <Font name="Arial" size="14" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="2"/>
-        <Property name="text" type="java.lang.String" value="User ID:"/>
+        <Property name="text" type="java.lang.String" value="User Name:"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
     </Component>
@@ -179,7 +183,44 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
     </Container>
-    <Component class="javax.swing.JSpinner" name="jSpinnerDate">
+    <Component class="javax.swing.JButton" name="jButtonCalendario">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/images/Calendar.png"/>
+        </Property>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
+        <Property name="borderPainted" type="boolean" value="false"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
+        <Property name="debugGraphicsOptions" type="int" value="-1"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="iconTextGap" type="int" value="0"/>
+        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+          <Insets value="[0, 0, 0, 0]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[31, 31]"/>
+        </Property>
+        <Property name="requestFocusEnabled" type="boolean" value="false"/>
+        <Property name="rolloverEnabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCalendarioActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelCalendario">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+            <BevelBorder/>
+          </Border>
+        </Property>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

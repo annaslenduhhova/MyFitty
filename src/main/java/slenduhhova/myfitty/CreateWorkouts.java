@@ -1,20 +1,22 @@
 package slenduhhova.myfitty;
 
+import com.anna.calendar.DayClickedListener;
+import com.anna.calendar.MyCalendar;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
 import javax.swing.ListSelectionModel;
-import javax.swing.SpinnerDateModel;
 import slenduhhova.myfitty.dataaccess.DataAccess;
 import slenduhhova.myfitty.dto.Exercici;
 import slenduhhova.myfitty.dto.Usuari;
@@ -24,32 +26,32 @@ import slenduhhova.myfitty.dto.Workout;
  *
  * @author annas
  */
-
-    class CreateWorkouts extends javax.swing.JPanel {
-     
+class CreateWorkouts extends javax.swing.JPanel {
+    
     private MainAfterLogin mainAfterLogin;
     private JList<Integer> jListExercises;
     private ArrayList<Exercici> exercicis;
     private JComboBox<Usuari> jComboBoxShowAllUsers;
-   
+    
     public CreateWorkouts(MainAfterLogin mainAfterLogin) {
         this.mainAfterLogin = mainAfterLogin;
-        initComponents();        
+        initComponents();
         setSize(300, 440);
         setBackground(new Color(240, 240, 240));
         
+        jLabelCalendario.setText(formatDate());
         jListExercises = new JList<>();
         jListExercises.setLayoutOrientation(JList.VERTICAL_WRAP);
-        jListExercises.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);       
+        jListExercises.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jScrollPaneExcercises.setViewportView(jListExercises);
         
         jComboBoxShowAllUsers = new JComboBox<>();
         jScrollPaneUserName.setViewportView(jComboBoxShowAllUsers);
+        jButtonCalendario.setToolTipText("Press icon to choose date");
         
-        setSpinnerDate();            
         fillListExcercises();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -63,13 +65,14 @@ import slenduhhova.myfitty.dto.Workout;
         jTextAreaComments = new javax.swing.JTextArea();
         jButtonCreateWorkout = new javax.swing.JButton();
         jScrollPaneUserName = new javax.swing.JScrollPane();
-        jSpinnerDate = new javax.swing.JSpinner();
+        jButtonCalendario = new javax.swing.JButton();
+        jLabelCalendario = new javax.swing.JLabel();
 
-        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabelUser.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelUser.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelUser.setText("User ID:");
+        jLabelUser.setText("User Name:");
         jLabelUser.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabelName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -101,6 +104,29 @@ import slenduhhova.myfitty.dto.Workout;
             }
         });
 
+        jButtonCalendario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Calendar.png"))); // NOI18N
+        jButtonCalendario.setAlignmentY(0.0F);
+        jButtonCalendario.setBorder(null);
+        jButtonCalendario.setBorderPainted(false);
+        jButtonCalendario.setContentAreaFilled(false);
+        jButtonCalendario.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jButtonCalendario.setFocusPainted(false);
+        jButtonCalendario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonCalendario.setIconTextGap(0);
+        jButtonCalendario.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jButtonCalendario.setPreferredSize(new java.awt.Dimension(31, 31));
+        jButtonCalendario.setRequestFocusEnabled(false);
+        jButtonCalendario.setRolloverEnabled(false);
+        jButtonCalendario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalendarioActionPerformed(evt);
+            }
+        });
+
+        jLabelCalendario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelCalendario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabelCalendario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,69 +140,93 @@ import slenduhhova.myfitty.dto.Workout;
                                 .addComponent(jLabelExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPaneExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jScrollPaneComments, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabelUser, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jScrollPaneUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelDate, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabelUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabelDate, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinnerDate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPaneComments, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPaneUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(103, 103, 103)
                         .addComponent(jButtonCreateWorkout, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(jSpinnerDate))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelUser, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(jScrollPaneUserName))
-                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
                         .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64))
+                        .addGap(65, 65, 65))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPaneComments, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)))
+                        .addGap(45, 45, 45)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jLabelExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPaneExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonCreateWorkout)
                 .addGap(17, 17, 17))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCreateWorkoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateWorkoutActionPerformed
-        try{
-            insertWorkout();       
+        try {
+            insertWorkout();
             JOptionPane.showMessageDialog(null, "New workout is added successfully!", "Workout", JOptionPane.PLAIN_MESSAGE);
             mainAfterLogin.createWorkout();
-        }catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             JOptionPane.showMessageDialog(null, "The date format is incorrect.", "Date Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "An unexpected error occurred. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-        }        
+        }
     }//GEN-LAST:event_jButtonCreateWorkoutActionPerformed
+
+    private void jButtonCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalendarioActionPerformed
+        JFrame calendarFrame = new JFrame("Select Date");
+        calendarFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        calendarFrame.setSize(400, 300);
+        calendarFrame.setLocationRelativeTo(null);
+        
+        MyCalendar calendar = new MyCalendar();
+        calendar.addDayClickedListener(new DayClickedListener() {
+            @Override
+            public void dayClicked(Date date) {
+                jLabelCalendario.setText(new SimpleDateFormat("dd/MM/yyyy").format(date));
+                calendarFrame.dispose(); // Cierra la ventana después de seleccionar una fecha
+            }
+        });
+        
+        calendarFrame.add(calendar);
+        calendarFrame.setVisible(true);
+    }//GEN-LAST:event_jButtonCalendarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCalendario;
     private javax.swing.JButton jButtonCreateWorkout;
+    private javax.swing.JLabel jLabelCalendario;
     private javax.swing.JLabel jLabelDate;
     private javax.swing.JLabel jLabelExcercises;
     private javax.swing.JLabel jLabelName;
@@ -184,14 +234,12 @@ import slenduhhova.myfitty.dto.Workout;
     private javax.swing.JScrollPane jScrollPaneComments;
     private javax.swing.JScrollPane jScrollPaneExcercises;
     private javax.swing.JScrollPane jScrollPaneUserName;
-    private javax.swing.JSpinner jSpinnerDate;
     private javax.swing.JTextArea jTextAreaComments;
     // End of variables declaration//GEN-END:variables
 
-
-    private Workout createWorkout(){
-
-        String date = formatDate();
+    private Workout createWorkout() {
+        
+        String date = formatDateToSql();
         Usuari selectedUser = (Usuari) jComboBoxShowAllUsers.getSelectedItem();
         int idUser = selectedUser.getId();
         String comments = jTextAreaComments.getText();
@@ -203,53 +251,62 @@ import slenduhhova.myfitty.dto.Workout;
         
         return workout;
     }
-
-    private String formatDate(){
-
-        Date selectedDate = (Date) jSpinnerDate.getValue();
-        LocalDateTime localDateTime = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        DateTimeFormatter sqlFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSS");
-        String formattedDateForSQL = localDateTime.format(sqlFormatter);
-
-        return formattedDateForSQL;
-    } 
     
-    public void fillComboBoxUsers(int id){
-        
-        ArrayList<Usuari> usuaris = DataAccess.getAllUsersByInstructor(id);       
-        for (Usuari usuari : usuaris) {
-            jComboBoxShowAllUsers.addItem(usuari);
-        }                
+    private String formatDateToSql() {
+        try {
+            String selectedDateText = jLabelCalendario.getText();
+            
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate localDate = LocalDate.parse(selectedDateText, inputFormatter);
+            
+            LocalDateTime localDateTime = localDate.atStartOfDay();
+            
+            DateTimeFormatter sqlFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSS");
+            String formattedDateForSQL = localDateTime.format(sqlFormatter);
+            
+            return formattedDateForSQL;
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("La fecha en el JLabel no está en el formato esperado (dd.MM.yyyy).", e);
+        }
     }
     
-    private void fillListExcercises(){
+    public void fillComboBoxUsers(int id) {
         
-        exercicis = DataAccess.getAllExercicis();        
+        ArrayList<Usuari> usuaris = DataAccess.getAllUsersByInstructor(id);
+        for (Usuari usuari : usuaris) {
+            jComboBoxShowAllUsers.addItem(usuari);
+        }
+    }
+    
+    private void fillListExcercises() {
+        
+        exercicis = DataAccess.getAllExercicis();
         DefaultListModel<Integer> model = new DefaultListModel<>();
         for (Exercici exercici : exercicis) {
             model.addElement(exercici.getId());
         }
         
-        jListExercises.setModel(model);         
+        jListExercises.setModel(model);
     }
     
-    private void setSpinnerDate(){
+    private void insertWorkout() {
         
-        jSpinnerDate.setModel(new SpinnerDateModel());
-        JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(jSpinnerDate, "dd/MM/yyyy");
-        jSpinnerDate.setEditor(dateEditor); 
-    }
-    
-    private void insertWorkout(){    
-              
-        ArrayList<Exercici> selectedExercises = new ArrayList<>();   
+        ArrayList<Exercici> selectedExercises = new ArrayList<>();
         List<Integer> selectedIds = jListExercises.getSelectedValuesList();
-    
+        
         for (Exercici exercici : exercicis) {
             if (selectedIds.contains(exercici.getId())) {
                 selectedExercises.add(exercici);
             }
-        }    
-        DataAccess.insertWorkout(createWorkout(), selectedExercises);      
+        }
+        DataAccess.insertWorkout(createWorkout(), selectedExercises);
+    }
+    
+    private String formatDate() {
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = today.format(formatter);
+        
+        return formattedDate;
     }
 }

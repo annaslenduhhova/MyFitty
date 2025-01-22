@@ -4,6 +4,7 @@ slenduhhova\myfitty\NewUser.class
 slenduhhova\myfitty\MainAfterLogin$2.class
 slenduhhova\myfitty\MainBeforeLogin.class
 slenduhhova\myfitty\Login.class
+slenduhhova\myfitty\CreateWorkouts$2.class
 slenduhhova\myfitty\Login$1.class
 slenduhhova\myfitty\dto\Exercici.class
 slenduhhova\myfitty\CreateExercise$1.class
@@ -25,6 +26,7 @@ slenduhhova\myfitty\MainAfterLogin$3.class
 slenduhhova\myfitty\ManageExercises$3.class
 slenduhhova\myfitty\Main$3.class
 slenduhhova\myfitty\ManageExercises.class
+slenduhhova\myfitty\CreateWorkouts$3.class
 slenduhhova\myfitty\CreateExercise.class
 slenduhhova\myfitty\MainAfterLogin$5.class
 slenduhhova\myfitty\Main.class

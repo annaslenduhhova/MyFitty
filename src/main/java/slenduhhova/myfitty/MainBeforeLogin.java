@@ -69,7 +69,7 @@ import java.net.URL;
 
         jButtonGoToLoginDialog.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jButtonGoToLoginDialog.setText("LOGIN");
-        jButtonGoToLoginDialog.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonGoToLoginDialog.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButtonGoToLoginDialog.setFocusPainted(false);
         jButtonGoToLoginDialog.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonGoToLoginDialog.addActionListener(new java.awt.event.ActionListener() {
