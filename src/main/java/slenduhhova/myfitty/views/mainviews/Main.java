@@ -49,8 +49,6 @@ import javax.swing.JMenuItem;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setResizable(false);
-        getContentPane().setLayout(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -59,6 +57,7 @@ import javax.swing.JMenuItem;
         mainBeforeLogin.setVisible(false);              
         mainAfterLogin.getjLabelWelcomeNameOfInstructor().setText(name);
         mainAfterLogin.setVisible(true);
+        mainAfterLogin.showListOfUsers();
     }
     
     public Login getLogin(){
