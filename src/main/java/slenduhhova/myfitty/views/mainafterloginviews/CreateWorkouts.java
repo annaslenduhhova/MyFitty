@@ -1,4 +1,4 @@
-package slenduhhova.myfitty;
+package slenduhhova.myfitty.views.mainafterloginviews;
 
 import com.anna.calendar.DayClickedListener;
 import com.anna.calendar.MyCalendar;
@@ -21,12 +21,13 @@ import slenduhhova.myfitty.dataaccess.DataAccess;
 import slenduhhova.myfitty.dto.Exercici;
 import slenduhhova.myfitty.dto.Usuari;
 import slenduhhova.myfitty.dto.Workout;
+import slenduhhova.myfitty.views.mainviews.MainAfterLogin;
 
 /**
  *
  * @author annas
  */
-class CreateWorkouts extends javax.swing.JPanel {
+public class CreateWorkouts extends javax.swing.JPanel {
     
     private MainAfterLogin mainAfterLogin;
     private JList<Integer> jListExercises;
@@ -91,9 +92,11 @@ class CreateWorkouts extends javax.swing.JPanel {
         jLabelExcercises.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jScrollPaneExcercises.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPaneExcercises.setNextFocusableComponent(jButtonCreateWorkout);
 
         jTextAreaComments.setColumns(20);
         jTextAreaComments.setRows(5);
+        jTextAreaComments.setNextFocusableComponent(jScrollPaneExcercises);
         jScrollPaneComments.setViewportView(jTextAreaComments);
 
         jButtonCreateWorkout.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -103,6 +106,8 @@ class CreateWorkouts extends javax.swing.JPanel {
                 jButtonCreateWorkoutActionPerformed(evt);
             }
         });
+
+        jScrollPaneUserName.setNextFocusableComponent(jScrollPaneComments);
 
         jButtonCalendario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Calendar.png"))); // NOI18N
         jButtonCalendario.setAlignmentY(0.0F);
@@ -126,6 +131,7 @@ class CreateWorkouts extends javax.swing.JPanel {
         jLabelCalendario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCalendario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabelCalendario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelCalendario.setNextFocusableComponent(jScrollPaneUserName);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

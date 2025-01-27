@@ -1,15 +1,16 @@
 
-package slenduhhova.myfitty;
+package slenduhhova.myfitty.views.dialogviews;
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import slenduhhova.myfitty.views.mainviews.Main;
 
 /**
  *
  * @author annas
  */
 
-    class HelpDialog extends javax.swing.JDialog {
+    public class HelpDialog extends javax.swing.JDialog {
     
     private Main main;
 

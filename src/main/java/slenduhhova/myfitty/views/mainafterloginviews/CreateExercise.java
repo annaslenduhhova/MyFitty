@@ -1,24 +1,28 @@
-package slenduhhova.myfitty;
+package slenduhhova.myfitty.views.mainafterloginviews;
 
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 import slenduhhova.myfitty.dataaccess.DataAccess;
 import slenduhhova.myfitty.dto.Exercici;
+import slenduhhova.myfitty.views.mainviews.MainAfterLogin;
 
 /**
  *
  * @author annas
  */
-class CreateExercise extends javax.swing.JPanel {
+public class CreateExercise extends javax.swing.JPanel {
 
     private MainAfterLogin mainAfterLogin;
     private JLabel previewLabel; // Para mostrar una vista previa de la imagen seleccionada
@@ -38,6 +42,12 @@ class CreateExercise extends javax.swing.JPanel {
             }
         });
         setupLayout();
+        jButtonFoto.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                SwingUtilities.getRootPane(jButtonCreate).setDefaultButton(jButtonCreate);
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -45,8 +55,8 @@ class CreateExercise extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabelName = new javax.swing.JLabel();
-        jLabelDescription = new javax.swing.JLabel();
         jLabelFoto = new javax.swing.JLabel();
+        jLabelDescription = new javax.swing.JLabel();
         jTextFieldName = new javax.swing.JTextField();
         jTextFieldDescription = new javax.swing.JTextField();
         jButtonCreate = new javax.swing.JButton();
@@ -61,15 +71,15 @@ class CreateExercise extends javax.swing.JPanel {
         jLabelName.setText("Name:");
         jLabelName.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabelDescription.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabelDescription.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelDescription.setText("photo:");
-        jLabelDescription.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-
         jLabelFoto.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelFoto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelFoto.setText("Description:");
+        jLabelFoto.setText("Photo:");
         jLabelFoto.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        jLabelDescription.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabelDescription.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelDescription.setText("Description:");
+        jLabelDescription.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         jTextFieldName.setAlignmentX(0.0F);
         jTextFieldName.setAlignmentY(0.0F);
@@ -111,8 +121,6 @@ class CreateExercise extends javax.swing.JPanel {
         });
 
         jButtonFoto.setText("Choose photo");
-        jButtonFoto.setAlignmentY(0.0F);
-        jButtonFoto.setFocusPainted(false);
         jButtonFoto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonFoto.setPreferredSize(new java.awt.Dimension(105, 23));
 
@@ -134,8 +142,8 @@ class CreateExercise extends javax.swing.JPanel {
                             .addComponent(jLabelNewExercise, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabelName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(29, 29, 29)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -143,7 +151,7 @@ class CreateExercise extends javax.swing.JPanel {
                                         .addComponent(jTextFieldDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
                                         .addComponent(jTextFieldName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jButtonFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)))))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -157,11 +165,11 @@ class CreateExercise extends javax.swing.JPanel {
                     .addComponent(jTextFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jButtonCreate, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
@@ -209,7 +217,6 @@ class CreateExercise extends javax.swing.JPanel {
             int idNewExercise = DataAccess.addNewExercise(exercici);
             exercici.setId(idNewExercise);
             JOptionPane.showMessageDialog(null, "New exercise has been created successfully.", "Exercise", JOptionPane.PLAIN_MESSAGE);
-            jLabelNewExercise.setText(exercici.toString());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error creating new exercise.", "Exercise", JOptionPane.ERROR_MESSAGE);
         }

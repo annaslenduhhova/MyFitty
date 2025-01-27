@@ -1,4 +1,4 @@
-package slenduhhova.myfitty;
+package slenduhhova.myfitty.views.mainviews;
 
 import java.awt.Color;
 import java.time.LocalDateTime;
@@ -6,15 +6,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import slenduhhova.myfitty.dataaccess.DataAccess;
+import slenduhhova.myfitty.views.mainafterloginviews.CreateWorkouts;
+import slenduhhova.myfitty.views.mainafterloginviews.CreateExercise;
+import slenduhhova.myfitty.views.mainafterloginviews.ManageExercises;
 import slenduhhova.myfitty.dto.Exercici;
 import slenduhhova.myfitty.dto.Usuari;
 import slenduhhova.myfitty.dto.Workout;
+import slenduhhova.myfitty.views.mainviews.MainAfterLogin;
 
 /**
  *
  * @author annas
  */
-class MainAfterLogin extends javax.swing.JPanel {
+public class MainAfterLogin extends javax.swing.JPanel {
 
     private Main main;
     private javax.swing.JList<Usuari> jListShowUsers;
@@ -80,7 +84,6 @@ class MainAfterLogin extends javax.swing.JPanel {
                 resizeInternalPanels();
             }
         });
-
     }
 
     @SuppressWarnings("unchecked")

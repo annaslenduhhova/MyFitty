@@ -1,5 +1,5 @@
 
-package slenduhhova.myfitty;
+package slenduhhova.myfitty.views.mainafterloginviews;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -7,13 +7,14 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import slenduhhova.myfitty.dataaccess.DataAccess;
 import slenduhhova.myfitty.dto.Exercici;
+import slenduhhova.myfitty.views.mainviews.MainAfterLogin;
 
 /**
  *
  * @author annas
  */
 
-    class ManageExercises extends javax.swing.JPanel {
+    public class ManageExercises extends javax.swing.JPanel {
 
     private MainAfterLogin mainAfterLogin;
     private JComboBox <Exercici> jComboBoxShowAllExercises;

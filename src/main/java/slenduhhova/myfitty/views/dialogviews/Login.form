@@ -99,6 +99,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value="ENTER"/>
         <Property name="actionCommand" type="java.lang.String" value="Enter"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
       <Events>

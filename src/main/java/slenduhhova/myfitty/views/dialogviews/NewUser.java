@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
-package slenduhhova.myfitty;
+
+package slenduhhova.myfitty.views.dialogviews;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.awt.Color;
@@ -10,12 +7,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import slenduhhova.myfitty.dataaccess.DataAccess;
 import slenduhhova.myfitty.dto.Usuari;
+import slenduhhova.myfitty.views.mainviews.Main;
 
 /**
  *
  * @author annas
  */
-class NewUser extends javax.swing.JDialog {
+public class NewUser extends javax.swing.JDialog {
 
     private Main main;
     

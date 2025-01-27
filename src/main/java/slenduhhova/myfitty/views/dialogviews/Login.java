@@ -1,5 +1,5 @@
 
-package slenduhhova.myfitty;
+package slenduhhova.myfitty.views.dialogviews;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.awt.Color;
@@ -7,13 +7,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import slenduhhova.myfitty.dataaccess.DataAccess;
 import slenduhhova.myfitty.dto.Usuari;
+import slenduhhova.myfitty.views.mainviews.Main;
 
 /**
  *
  * @author annas
  */
 
-    class Login extends javax.swing.JDialog {
+    public class Login extends javax.swing.JDialog {
     
     private Main main;
     
@@ -24,7 +25,7 @@ import slenduhhova.myfitty.dto.Usuari;
         setIconImage(new ImageIcon(getClass().getResource("/images/icono.png")).getImage());
         setSize(310,240);
         setLocationRelativeTo(main); 
-        getContentPane().setBackground(new Color(240, 240, 240));            
+        getContentPane().setBackground(new Color(240, 240, 240));   
     }
 
     @SuppressWarnings("unchecked")
@@ -52,6 +53,7 @@ import slenduhhova.myfitty.dto.Usuari;
         jButtonEnter.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jButtonEnter.setText("ENTER");
         jButtonEnter.setActionCommand("Enter");
+        jButtonEnter.setFocusPainted(false);
         jButtonEnter.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonEnter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
