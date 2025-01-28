@@ -1,10 +1,18 @@
 package slenduhhova.myfitty.views.mainviews;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import slenduhhova.myfitty.dataaccess.DataAccess;
 import slenduhhova.myfitty.views.mainafterloginviews.CreateWorkouts;
 import slenduhhova.myfitty.views.mainafterloginviews.CreateExercise;
@@ -12,7 +20,6 @@ import slenduhhova.myfitty.views.mainafterloginviews.ManageExercises;
 import slenduhhova.myfitty.dto.Exercici;
 import slenduhhova.myfitty.dto.Usuari;
 import slenduhhova.myfitty.dto.Workout;
-import slenduhhova.myfitty.views.mainviews.MainAfterLogin;
 
 /**
  *
@@ -142,6 +149,7 @@ public class MainAfterLogin extends javax.swing.JPanel {
 
         jButtonSignOut.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonSignOut.setText("Sign out");
+        jButtonSignOut.setFocusPainted(false);
         jButtonSignOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSignOutActionPerformed(evt);
@@ -225,13 +233,59 @@ public class MainAfterLogin extends javax.swing.JPanel {
             model.addElement(usuari);
         }
         jListShowUsers.setModel(model);
+        
+        final int[] hoveredIndex = {-1};
+
+        // Cambiar el renderer de la lista
+        jListShowUsers.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+                // Cambiar el fondo si el índice coincide con el que tiene el ratón encima
+                if (index == hoveredIndex[0]) {
+                    label.setBackground(new Color(220, 220, 220)); // Azul oscuro para hover
+                } else if (isSelected) {
+                    label.setBackground(new Color(180, 220, 220)); // Color para elementos seleccionados
+                } else {
+                    label.setBackground(Color.WHITE); // Fondo por defecto
+                }
+
+                label.setOpaque(true); // Hacer visible el fondo
+                return label;
+            }
+        });
+
+        // Añadir un MouseMotionListener para detectar el movimiento del ratón
+        jListShowUsers.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                Point mousePoint = e.getPoint();
+                int index = jListShowUsers.locationToIndex(mousePoint);
+
+                // Actualizar el índice hover solo si cambió
+                if (index != hoveredIndex[0]) {
+                    hoveredIndex[0] = index;
+                    jListShowUsers.repaint(); // Forzar re-renderización
+                }
+            }
+        });
+
+        // Añadir un MouseListener para limpiar el hover al salir de la lista
+        jListShowUsers.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                hoveredIndex[0] = -1; // Ningún elemento está siendo hover
+                jListShowUsers.repaint(); // Forzar re-renderización
+            }
+        });
     }
 
     private void resizeInternalPanels() {
-        int panelWidth = getWidth() - 470; 
-        int panelHeight = getHeight() - 110; 
-        panelWidth = Math.max(300, panelWidth); 
-        panelHeight = Math.max(300, panelHeight); 
+        int panelWidth = getWidth() - 470;
+        int panelHeight = getHeight() - 110;
+        panelWidth = Math.max(300, panelWidth);
+        panelHeight = Math.max(300, panelHeight);
 
         createExercise.setBounds(455, 85, panelWidth, panelHeight);
     }
