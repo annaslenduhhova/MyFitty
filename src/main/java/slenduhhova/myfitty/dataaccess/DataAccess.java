@@ -1,9 +1,6 @@
 
 package slenduhhova.myfitty.dataaccess;
 
-
-import at.favre.lib.crypto.bcrypt.BCrypt;
-import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
-import javax.swing.JOptionPane;
 import slenduhhova.myfitty.dto.Exercici;
 import slenduhhova.myfitty.dto.Usuari;
 import slenduhhova.myfitty.dto.Workout;

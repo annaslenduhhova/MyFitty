@@ -32,7 +32,7 @@ public class CreateWorkouts extends javax.swing.JPanel {
     private MainAfterLogin mainAfterLogin;
     private JList<Integer> jListExercises;
     private ArrayList<Exercici> exercicis;
-    private JComboBox<Usuari> jComboBoxShowAllUsers;
+    private JComboBox<Object> jComboBoxShowAllUsers;
     
     public CreateWorkouts(MainAfterLogin mainAfterLogin) {
         this.mainAfterLogin = mainAfterLogin;
@@ -49,6 +49,7 @@ public class CreateWorkouts extends javax.swing.JPanel {
         jComboBoxShowAllUsers = new JComboBox<>();
         jScrollPaneUserName.setViewportView(jComboBoxShowAllUsers);
         jButtonCalendario.setToolTipText("Press icon to choose date");
+        jListExercises.setToolTipText("<html>Hold <b>Ctrl</b> to choose multiple options</html>");
         
         fillListExcercises();
     }
@@ -69,11 +70,11 @@ public class CreateWorkouts extends javax.swing.JPanel {
         jButtonCalendario = new javax.swing.JButton();
         jLabelCalendario = new javax.swing.JLabel();
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelUser.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelUser.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelUser.setText("User Name:");
+        jLabelUser.setText("User name:");
         jLabelUser.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabelName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -163,7 +164,7 @@ public class CreateWorkouts extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(103, 103, 103)
                         .addComponent(jButtonCreateWorkout, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,6 +280,7 @@ public class CreateWorkouts extends javax.swing.JPanel {
     public void fillComboBoxUsers(int id) {
         
         ArrayList<Usuari> usuaris = DataAccess.getAllUsersByInstructor(id);
+        jComboBoxShowAllUsers.addItem("-select one-");
         for (Usuari usuari : usuaris) {
             jComboBoxShowAllUsers.addItem(usuari);
         }

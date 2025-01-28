@@ -3,16 +3,21 @@ package slenduhhova.myfitty.views.mainviews;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Point;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.event.ListSelectionListener;
 import slenduhhova.myfitty.dataaccess.DataAccess;
 import slenduhhova.myfitty.views.mainafterloginviews.CreateWorkouts;
 import slenduhhova.myfitty.views.mainafterloginviews.CreateExercise;
@@ -29,10 +34,11 @@ public class MainAfterLogin extends javax.swing.JPanel {
 
     private Main main;
     private javax.swing.JList<Usuari> jListShowUsers;
-    private javax.swing.JList<Workout> jListShowWorkouts;
+    private JComboBox<Object> jComboBoxShowWorkouts;
     private CreateWorkouts createWorkouts;
     private ManageExercises manageExercises;
     private CreateExercise createExercise;
+    private JComboBox jComboBoxDetails;
 
     public MainAfterLogin(Main main) {
         this.main = main;
@@ -52,11 +58,23 @@ public class MainAfterLogin extends javax.swing.JPanel {
         add(createExercise);
         createExercise.setVisible(false);
 
+        jComboBoxDetails = new JComboBox();
+        add(jComboBoxDetails);
+
+        jLabelDate.setVisible(false);
+        jLabelComments.setVisible(false);
+        jComboBoxDetails.setVisible(false);
+
         int welcomeX = (getWidth() - 306) / 2;
         jLabelWelcomeNameOfInstructor.setBounds(welcomeX, 30, 306, 37);
         jScrollPaneListUsers.setBounds(60, 140, 130, 70);
-        jScrollPaneListWorkouts.setBounds(210, 140, 55, 70);
-        jScrollPaneWorkoutDetails.setBounds(30, 235, 260, 130);
+        jScrollPaneListWorkouts.setBounds(60, 270, 102, 32);
+        jLabelDate.setBounds(60, 360, 80, 45);
+        jLabelComments.setBounds(160, 360, 140, 45);
+        jComboBoxDetails.setBounds(60, 410, 240, 40);
+        jLabelChooseUser.setBounds(60, 110, 140, 15);
+        jLabelChooseWorkout.setBounds(60, 240, 140, 15);
+        jLabelExerciseDetails.setBounds(60, 330, 230, 15);
         jButtonCreateWorkout.setBounds(305, 110, 145, 27);
         jButtonManageExercises.setBounds(305, 155, 145, 27);
         createWorkouts.setBounds(455, 85, 295, 440);
@@ -65,23 +83,24 @@ public class MainAfterLogin extends javax.swing.JPanel {
         jLabelIcon.setBounds(450, 95, 300, 330);
         jButtonSignOut.setBounds(690, 15, 80, 25);
 
-        jListShowUsers = new javax.swing.JList<>();
-        jListShowUsers.setLayoutOrientation(javax.swing.JList.VERTICAL_WRAP);
+        jListShowUsers = new JList<>();
+        jListShowUsers.setLayoutOrientation(JList.VERTICAL_WRAP);
         jScrollPaneListUsers.setViewportView(jListShowUsers);
-        jListShowUsers.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        jListShowUsers.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 jListShowUsersValueChanged(evt);
             }
         });
 
-        jListShowWorkouts = new javax.swing.JList<>();
-        jListShowWorkouts.setLayoutOrientation(javax.swing.JList.VERTICAL_WRAP);
-        jScrollPaneListWorkouts.setViewportView(jListShowWorkouts);
-        jListShowWorkouts.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        jComboBoxShowWorkouts = new JComboBox();
+        jScrollPaneListWorkouts.setViewportView(jComboBoxShowWorkouts);
+        jComboBoxShowWorkouts.addItemListener(new ItemListener() {
             @Override
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jListShowWorkoutsValueChanged(evt);
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+                    jComboBoxShowWorkoutsItemStateChanged(evt);
+                }
             }
         });
 
@@ -104,8 +123,11 @@ public class MainAfterLogin extends javax.swing.JPanel {
         jLabelIcon = new javax.swing.JLabel();
         jButtonCreateWorkout = new javax.swing.JButton();
         jButtonSignOut = new javax.swing.JButton();
-        jScrollPaneWorkoutDetails = new javax.swing.JScrollPane();
-        jTextAreaWorkoutDetails = new javax.swing.JTextArea();
+        jLabelChooseUser = new javax.swing.JLabel();
+        jLabelChooseWorkout = new javax.swing.JLabel();
+        jLabelExerciseDetails = new javax.swing.JLabel();
+        jLabelDate = new javax.swing.JLabel();
+        jLabelComments = new javax.swing.JLabel();
 
         setOpaque(false);
         setLayout(null);
@@ -117,12 +139,12 @@ public class MainAfterLogin extends javax.swing.JPanel {
         add(jLabelWelcomeNameOfInstructor);
         jLabelWelcomeNameOfInstructor.setBounds(45, 26, 306, 37);
         add(jScrollPaneListUsers);
-        jScrollPaneListUsers.setBounds(104, 126, 126, 65);
+        jScrollPaneListUsers.setBounds(90, 130, 110, 65);
         add(jScrollPaneListWorkouts);
-        jScrollPaneListWorkouts.setBounds(248, 126, 49, 65);
+        jScrollPaneListWorkouts.setBounds(90, 250, 49, 30);
 
         jButtonManageExercises.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButtonManageExercises.setText("Manage exercises");
+        jButtonManageExercises.setText("Manage exercise");
         jButtonManageExercises.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButtonManageExercises.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,12 +180,29 @@ public class MainAfterLogin extends javax.swing.JPanel {
         add(jButtonSignOut);
         jButtonSignOut.setBounds(685, 10, 100, 23);
 
-        jTextAreaWorkoutDetails.setColumns(20);
-        jTextAreaWorkoutDetails.setRows(5);
-        jScrollPaneWorkoutDetails.setViewportView(jTextAreaWorkoutDetails);
+        jLabelChooseUser.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelChooseUser.setText("Choose user:");
+        add(jLabelChooseUser);
+        jLabelChooseUser.setBounds(90, 110, 100, 20);
 
-        add(jScrollPaneWorkoutDetails);
-        jScrollPaneWorkoutDetails.setBounds(70, 260, 240, 110);
+        jLabelChooseWorkout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelChooseWorkout.setText("Choose workout:");
+        add(jLabelChooseWorkout);
+        jLabelChooseWorkout.setBounds(90, 230, 100, 20);
+
+        jLabelExerciseDetails.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelExerciseDetails.setText("Consult workout details here:");
+        add(jLabelExerciseDetails);
+        jLabelExerciseDetails.setBounds(90, 310, 200, 20);
+
+        jLabelDate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabelDate.setBorder(javax.swing.BorderFactory.createTitledBorder("Date"));
+        add(jLabelDate);
+        jLabelDate.setBounds(90, 330, 120, 40);
+
+        jLabelComments.setBorder(javax.swing.BorderFactory.createTitledBorder("Comments"));
+        add(jLabelComments);
+        jLabelComments.setBounds(100, 380, 120, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonManageExercisesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManageExercisesActionPerformed
@@ -190,39 +229,50 @@ public class MainAfterLogin extends javax.swing.JPanel {
     private javax.swing.JButton jButtonCreateWorkout;
     private javax.swing.JButton jButtonManageExercises;
     private javax.swing.JButton jButtonSignOut;
+    private javax.swing.JLabel jLabelChooseUser;
+    private javax.swing.JLabel jLabelChooseWorkout;
+    private javax.swing.JLabel jLabelComments;
+    private javax.swing.JLabel jLabelDate;
+    private javax.swing.JLabel jLabelExerciseDetails;
     private javax.swing.JLabel jLabelIcon;
     private javax.swing.JLabel jLabelWelcomeNameOfInstructor;
     private javax.swing.JScrollPane jScrollPaneListUsers;
     private javax.swing.JScrollPane jScrollPaneListWorkouts;
-    private javax.swing.JScrollPane jScrollPaneWorkoutDetails;
-    private javax.swing.JTextArea jTextAreaWorkoutDetails;
     // End of variables declaration//GEN-END:variables
 
     private void jListShowUsersValueChanged(javax.swing.event.ListSelectionEvent evt) {
 
         Usuari selectedUsuari = jListShowUsers.getSelectedValue();
         ArrayList<Workout> workouts = DataAccess.getWorkoutsPerUser(selectedUsuari);
-        DefaultListModel<Workout> model = new DefaultListModel<>();
+        DefaultComboBoxModel<Object> model = new DefaultComboBoxModel<>();
+        model.addElement("-select one-");
         for (Workout workout : workouts) {
             model.addElement(workout);
         }
-        jListShowWorkouts.setModel(model);
+        jComboBoxShowWorkouts.setModel(model);
     }
 
-    private void jListShowWorkoutsValueChanged(javax.swing.event.ListSelectionEvent evt) {
+    private void jComboBoxShowWorkoutsItemStateChanged(ItemEvent evt) {
+        jComboBoxDetails.addItem("-exercises-");
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            jComboBoxDetails.removeAllItems();
+            Workout selectedWorkout = (Workout) jComboBoxShowWorkouts.getSelectedItem();
+            ArrayList<Exercici> exercicis = DataAccess.getExercicisPerWorkout(selectedWorkout);
+            for (Exercici exercici : exercicis) {
+                jComboBoxDetails.addItem(exercici.toString());
+            }
+            LocalDateTime localDateTime = LocalDateTime.parse(selectedWorkout.getForDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSS"));
+            DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String formattedDate = localDateTime.format(displayFormatter);
 
-        Workout selectedWorkout = jListShowWorkouts.getSelectedValue();
-        ArrayList<Exercici> exercicis = DataAccess.getExercicisPerWorkout(selectedWorkout);
+            jLabelDate.setText(formattedDate);
+            jLabelComments.setText(selectedWorkout.getComments());
 
-        StringBuilder exercicisText = new StringBuilder();
-        for (Exercici exercici : exercicis) {
-            exercicisText.append(exercici.toString()).append("\n");
+            jLabelDate.setVisible(true);
+            jLabelComments.setVisible(true);
+            jComboBoxDetails.setVisible(true);
+            
         }
-        LocalDateTime localDateTime = LocalDateTime.parse(selectedWorkout.getForDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSS"));
-        DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String formattedDate = localDateTime.format(displayFormatter);
-        jTextAreaWorkoutDetails.setText("Fecha de workout: " + formattedDate + "\n" + "Comentarios de workout: " + selectedWorkout.getComments() + "\n" + exercicisText);
-
     }
 
     void showListOfUsers() {
@@ -233,7 +283,7 @@ public class MainAfterLogin extends javax.swing.JPanel {
             model.addElement(usuari);
         }
         jListShowUsers.setModel(model);
-        
+
         final int[] hoveredIndex = {-1};
 
         // Cambiar el renderer de la lista
