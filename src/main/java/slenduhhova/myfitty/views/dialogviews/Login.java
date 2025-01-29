@@ -2,9 +2,13 @@ package slenduhhova.myfitty.views.dialogviews;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import javax.swing.UIManager;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import slenduhhova.myfitty.dataaccess.DataAccess;
 import slenduhhova.myfitty.dto.Usuari;
 import slenduhhova.myfitty.views.mainviews.Main;
@@ -27,6 +31,34 @@ public class Login extends javax.swing.JDialog {
         getContentPane().setBackground(new Color(240, 240, 240));
         jLabelHelp.setText("<html>Forgot Your password or need any help?<br>Contact us: <font color='#00008B'>help@myfitty.com</font></html>");
         jProgressBarEnter.setVisible(false);
+
+        jTextFieldEmail.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                validateEmail();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                validateEmail();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                validateEmail();
+            }
+
+            private void validateEmail() {
+                String email = jTextFieldEmail.getText();
+                String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{1,}$"; // Expresión regular para emails
+
+                if (!email.matches(emailRegex)) {
+                    jTextFieldEmail.setBorder(BorderFactory.createLineBorder(Color.RED, 2)); // Borde rojo si no es válido
+                } else {
+                    jTextFieldEmail.setBorder(UIManager.getBorder("TextField.border")); // Restaurar borde predeterminado
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
