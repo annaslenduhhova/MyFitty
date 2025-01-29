@@ -76,7 +76,8 @@ public class MainAfterLogin extends javax.swing.JPanel {
         jLabelChooseWorkout.setBounds(60, 240, 140, 15);
         jLabelExerciseDetails.setBounds(60, 330, 230, 15);
         jButtonCreateWorkout.setBounds(305, 110, 145, 27);
-        jButtonManageExercises.setBounds(305, 155, 145, 27);
+        jButtonCreateExercise.setBounds(305, 155, 145, 27);
+        jButtonManageExercises.setBounds(305, 200, 145, 27);
         createWorkouts.setBounds(455, 85, 295, 440);
         manageExercises.setBounds(455, 85, 295, 440);
         createExercise.setBounds(455, 85, 295, 440);
@@ -128,6 +129,7 @@ public class MainAfterLogin extends javax.swing.JPanel {
         jLabelExerciseDetails = new javax.swing.JLabel();
         jLabelDate = new javax.swing.JLabel();
         jLabelComments = new javax.swing.JLabel();
+        jButtonCreateExercise = new javax.swing.JButton();
 
         setOpaque(false);
         setLayout(null);
@@ -146,20 +148,22 @@ public class MainAfterLogin extends javax.swing.JPanel {
         jButtonManageExercises.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButtonManageExercises.setText("Manage exercise");
         jButtonManageExercises.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonManageExercises.setFocusPainted(false);
         jButtonManageExercises.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonManageExercisesActionPerformed(evt);
             }
         });
         add(jButtonManageExercises);
-        jButtonManageExercises.setBounds(380, 170, 140, 30);
+        jButtonManageExercises.setBounds(380, 220, 140, 30);
 
         jLabelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/runners.png"))); // NOI18N
         add(jLabelIcon);
-        jLabelIcon.setBounds(480, 50, 330, 360);
+        jLabelIcon.setBounds(480, 60, 330, 360);
 
         jButtonCreateWorkout.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButtonCreateWorkout.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonCreateWorkout.setFocusPainted(false);
         jButtonCreateWorkout.setLabel("New workout");
         jButtonCreateWorkout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +207,18 @@ public class MainAfterLogin extends javax.swing.JPanel {
         jLabelComments.setBorder(javax.swing.BorderFactory.createTitledBorder("Comments"));
         add(jLabelComments);
         jLabelComments.setBounds(100, 380, 120, 23);
+
+        jButtonCreateExercise.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButtonCreateExercise.setText("New exercise");
+        jButtonCreateExercise.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonCreateExercise.setFocusPainted(false);
+        jButtonCreateExercise.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreateExerciseActionPerformed(evt);
+            }
+        });
+        add(jButtonCreateExercise);
+        jButtonCreateExercise.setBounds(380, 170, 140, 30);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonManageExercisesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManageExercisesActionPerformed
@@ -224,8 +240,16 @@ public class MainAfterLogin extends javax.swing.JPanel {
         main.setLogOut();
     }//GEN-LAST:event_jButtonSignOutActionPerformed
 
+    private void jButtonCreateExerciseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateExerciseActionPerformed
+        jLabelIcon.setVisible(false);
+        manageExercises.setVisible(false);
+        createWorkouts.setVisible(false);
+        createExercise.setVisible(true);
+    }//GEN-LAST:event_jButtonCreateExerciseActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCreateExercise;
     private javax.swing.JButton jButtonCreateWorkout;
     private javax.swing.JButton jButtonManageExercises;
     private javax.swing.JButton jButtonSignOut;
@@ -271,7 +295,7 @@ public class MainAfterLogin extends javax.swing.JPanel {
             jLabelDate.setVisible(true);
             jLabelComments.setVisible(true);
             jComboBoxDetails.setVisible(true);
-            
+
         }
     }
 
@@ -348,11 +372,6 @@ public class MainAfterLogin extends javax.swing.JPanel {
     public void createWorkout() {
         createWorkouts.setVisible(false);
         jLabelIcon.setVisible(true);
-    }
-
-    public void createExercise() {
-        manageExercises.setVisible(false);
-        createExercise.setVisible(true);
     }
 
     public javax.swing.JLabel getjLabelWelcomeNameOfInstructor() {

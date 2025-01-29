@@ -28,32 +28,32 @@ import slenduhhova.myfitty.views.mainviews.MainAfterLogin;
  * @author annas
  */
 public class CreateWorkouts extends javax.swing.JPanel {
-    
+
     private MainAfterLogin mainAfterLogin;
     private JList<Integer> jListExercises;
     private ArrayList<Exercici> exercicis;
     private JComboBox<Object> jComboBoxShowAllUsers;
-    
+
     public CreateWorkouts(MainAfterLogin mainAfterLogin) {
         this.mainAfterLogin = mainAfterLogin;
         initComponents();
         setSize(300, 440);
         setBackground(new Color(240, 240, 240));
-        
+
         jLabelCalendario.setText(formatDate());
         jListExercises = new JList<>();
         jListExercises.setLayoutOrientation(JList.VERTICAL_WRAP);
         jListExercises.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jScrollPaneExcercises.setViewportView(jListExercises);
-        
+
         jComboBoxShowAllUsers = new JComboBox<>();
         jScrollPaneUserName.setViewportView(jComboBoxShowAllUsers);
         jButtonCalendario.setToolTipText("Press icon to choose date");
         jListExercises.setToolTipText("<html>Hold <b>Ctrl</b> to choose multiple options</html>");
-        
+
         fillListExcercises();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -215,7 +215,7 @@ public class CreateWorkouts extends javax.swing.JPanel {
         calendarFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         calendarFrame.setSize(400, 300);
         calendarFrame.setLocationRelativeTo(null);
-        
+
         MyCalendar calendar = new MyCalendar();
         calendar.addDayClickedListener(new DayClickedListener() {
             @Override
@@ -224,7 +224,7 @@ public class CreateWorkouts extends javax.swing.JPanel {
                 calendarFrame.dispose(); // Cierra la ventana después de seleccionar una fecha
             }
         });
-        
+
         calendarFrame.add(calendar);
         calendarFrame.setVisible(true);
     }//GEN-LAST:event_jButtonCalendarioActionPerformed
@@ -245,63 +245,63 @@ public class CreateWorkouts extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private Workout createWorkout() {
-        
+
         String date = formatDateToSql();
         Usuari selectedUser = (Usuari) jComboBoxShowAllUsers.getSelectedItem();
         int idUser = selectedUser.getId();
         String comments = jTextAreaComments.getText();
-        
+
         Workout workout = new Workout();
         workout.setForDate(date);
         workout.setUserId(idUser);
         workout.setComments(comments);
-        
+
         return workout;
     }
-    
+
     private String formatDateToSql() {
         try {
             String selectedDateText = jLabelCalendario.getText();
-            
+
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.parse(selectedDateText, inputFormatter);
-            
+
             LocalDateTime localDateTime = localDate.atStartOfDay();
-            
+
             DateTimeFormatter sqlFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSS");
             String formattedDateForSQL = localDateTime.format(sqlFormatter);
-            
+
             return formattedDateForSQL;
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("La fecha en el JLabel no está en el formato esperado (dd.MM.yyyy).", e);
         }
     }
-    
+
     public void fillComboBoxUsers(int id) {
-        
+
         ArrayList<Usuari> usuaris = DataAccess.getAllUsersByInstructor(id);
         jComboBoxShowAllUsers.addItem("-select one-");
         for (Usuari usuari : usuaris) {
             jComboBoxShowAllUsers.addItem(usuari);
         }
     }
-    
+
     private void fillListExcercises() {
-        
+
         exercicis = DataAccess.getAllExercicis();
         DefaultListModel<Integer> model = new DefaultListModel<>();
         for (Exercici exercici : exercicis) {
             model.addElement(exercici.getId());
         }
-        
+
         jListExercises.setModel(model);
     }
-    
+
     private void insertWorkout() {
-        
+
         ArrayList<Exercici> selectedExercises = new ArrayList<>();
         List<Integer> selectedIds = jListExercises.getSelectedValuesList();
-        
+
         for (Exercici exercici : exercicis) {
             if (selectedIds.contains(exercici.getId())) {
                 selectedExercises.add(exercici);
@@ -309,13 +309,13 @@ public class CreateWorkouts extends javax.swing.JPanel {
         }
         DataAccess.insertWorkout(createWorkout(), selectedExercises);
     }
-    
+
     private String formatDate() {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = today.format(formatter);
-        
+
         return formattedDate;
     }
-    
+
 }

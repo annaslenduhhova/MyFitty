@@ -25,7 +25,7 @@ import slenduhhova.myfitty.views.mainviews.MainAfterLogin;
 public class CreateExercise extends javax.swing.JPanel {
 
     private MainAfterLogin mainAfterLogin;
-    private JLabel previewLabel; // Para mostrar una vista previa de la imagen seleccionada
+    private JLabel jLabelPreviewPhoto; // Para mostrar una vista previa de la imagen seleccionada
     private File selectedFile; // Guardar la imagen seleccionada
 
     public CreateExercise(MainAfterLogin mainAfterLogin) {
@@ -33,15 +33,21 @@ public class CreateExercise extends javax.swing.JPanel {
         initComponents();
         setSize(300, 440);
         setBackground(new Color(240, 240, 240));
-        previewLabel = new JLabel();
-        previewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabelPreviewPhoto = new JLabel();
+        jLabelPreviewPhoto.setHorizontalAlignment(SwingConstants.CENTER);
+
+        setupLayout();
+
+        ImageIcon defaultIcon = new ImageIcon(getClass().getResource("/images/icono.png"));
+        Image scaledDefaultImage = defaultIcon.getImage().getScaledInstance(55, 55, Image.SCALE_SMOOTH);
+        jLabelPreviewPhoto.setIcon(new ImageIcon(scaledDefaultImage));
+
         jButtonFoto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 choosePhoto();
             }
         });
-        setupLayout();
         jButtonFoto.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -122,37 +128,35 @@ public class CreateExercise extends javax.swing.JPanel {
 
         jButtonFoto.setText("Choose photo");
         jButtonFoto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonFoto.setPreferredSize(new java.awt.Dimension(105, 23));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelNewExercise, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(jButtonGoBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jTextFieldDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                                .addComponent(jTextFieldName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonFoto))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(jButtonCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabelNewExercise, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabelName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextFieldDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                                        .addComponent(jTextFieldName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jButtonFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)))))
+                        .addGap(29, 29, 29)
+                        .addComponent(jButtonCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(71, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jButtonGoBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,12 +174,12 @@ public class CreateExercise extends javax.swing.JPanel {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonFoto))
                 .addGap(28, 28, 28)
                 .addComponent(jButtonCreate, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonGoBack, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                .addGap(188, 188, 188))
+                .addGap(194, 194, 194))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -232,8 +236,8 @@ public class CreateExercise extends javax.swing.JPanel {
         add(jLabelDescription);
         add(jTextFieldDescription, "growx, growy, hmin 25, wmin 100, wmax 900");
         add(jLabelFoto);
-        add(jButtonFoto, "growx");
-        add(previewLabel, "span 2, center, gaptop 10, growx, growy, hmin 35, wmin 25, hmax 65, wmax 55");
+        add(jButtonFoto, "growx, wmin 100, wmax 900");
+        add(jLabelPreviewPhoto, "span 2, center, gaptop 10, growx, growy, hmin 35, wmin 25, hmax 55, wmax 55");
         add(jButtonCreate, "span 2, center, gaptop 15");
         add(jButtonGoBack, "span 2, center, gaptop 15");
     }
@@ -255,12 +259,11 @@ public class CreateExercise extends javax.swing.JPanel {
         if (file != null) {
             try {
                 ImageIcon originalIcon = new ImageIcon(file.getAbsolutePath());
-                Image scaledImage = originalIcon.getImage().getScaledInstance(
-                        previewLabel.getWidth(), previewLabel.getHeight(), Image.SCALE_SMOOTH);
-                previewLabel.setIcon(new ImageIcon(scaledImage));
+                Image scaledImage = originalIcon.getImage().getScaledInstance(jLabelPreviewPhoto.getWidth(), jLabelPreviewPhoto.getHeight(), Image.SCALE_SMOOTH);
+                jLabelPreviewPhoto.setIcon(new ImageIcon(scaledImage));
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error loading image.", "Error", JOptionPane.ERROR_MESSAGE);
-                previewLabel.setIcon(null);
+                jLabelPreviewPhoto.setIcon(null);
             }
         }
     }

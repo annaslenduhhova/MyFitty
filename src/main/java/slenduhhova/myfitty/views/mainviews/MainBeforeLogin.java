@@ -27,7 +27,7 @@ class MainBeforeLogin extends javax.swing.JPanel {
 
         int buttonX = (getWidth() - 117) / 2;
         jButtonLogin.setBounds(buttonX, 368, 117, 47);
-        jButtonRegisterUser.setBounds(333, 460, 130, 30);       
+        jButtonRegisterUser.setBounds(333, 460, 130, 30);
 
     }
 
