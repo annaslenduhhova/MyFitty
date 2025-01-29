@@ -5,17 +5,20 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import slenduhhova.myfitty.views.dialogviews.DarkPattern;
 
 /**
  *
  * @author annas
  */
-class MainBeforeLogin extends javax.swing.JPanel {
+public class MainBeforeLogin extends javax.swing.JPanel {
 
     private Main main;
+    private DarkPattern darkPattern;
 
     public MainBeforeLogin(Main main) {
         this.main = main;
+        darkPattern = new DarkPattern(main);
         initComponents();
         setSize(800, 500);
         setBackground(new Color(240, 240, 240));
@@ -28,7 +31,6 @@ class MainBeforeLogin extends javax.swing.JPanel {
         int buttonX = (getWidth() - 117) / 2;
         jButtonLogin.setBounds(buttonX, 368, 117, 47);
         jButtonRegisterUser.setBounds(333, 460, 130, 30);
-
     }
 
     @SuppressWarnings("unchecked")
@@ -90,6 +92,7 @@ class MainBeforeLogin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
+        darkPattern.setVisible(true);
         main.getLogin().setVisible(true);
     }//GEN-LAST:event_jButtonLoginActionPerformed
 

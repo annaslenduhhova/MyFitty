@@ -14,6 +14,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
+import slenduhhova.myfitty.views.dialogviews.DarkPattern;
 import slenduhhova.myfitty.views.dialogviews.NewUser;
 import slenduhhova.myfitty.views.dialogviews.HelpDialog;
 import slenduhhova.myfitty.views.dialogviews.Login;
@@ -107,13 +108,13 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void mouseEntered(MouseEvent e) {
                 jMenuFile.setOpaque(true);
-                jMenuFile.setBackground(new Color(220, 220, 220)); 
+                jMenuFile.setBackground(new Color(220, 220, 220));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 jMenuFile.setOpaque(false);
-                jMenuFile.setBackground(null); 
+                jMenuFile.setBackground(null);
             }
         });
         JMenuItem exitMenuItem = new JMenuItem("Exit");
@@ -130,13 +131,13 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void mouseEntered(MouseEvent e) {
                 jMenuHelp.setOpaque(true);
-                jMenuHelp.setBackground(new Color(220, 220, 220)); 
+                jMenuHelp.setBackground(new Color(220, 220, 220));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 jMenuHelp.setOpaque(false);
-                jMenuHelp.setBackground(null); 
+                jMenuHelp.setBackground(null);
             }
         });
         JMenuItem aboutMenuItem = new JMenuItem("About");

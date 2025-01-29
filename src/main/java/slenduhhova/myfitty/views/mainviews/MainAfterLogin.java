@@ -53,6 +53,7 @@ public class MainAfterLogin extends javax.swing.JPanel {
         initComponents();
         setSize(800, 600);
         setBackground(new Color(240, 240, 240));
+        
         menuBar = new JMenuBar();
         add(menuBar);
 
