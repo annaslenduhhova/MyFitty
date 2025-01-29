@@ -3,6 +3,8 @@ package slenduhhova.myfitty.views.mainviews;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
@@ -14,9 +16,14 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionListener;
 import slenduhhova.myfitty.dataaccess.DataAccess;
 import slenduhhova.myfitty.views.mainafterloginviews.CreateWorkouts;
@@ -39,12 +46,15 @@ public class MainAfterLogin extends javax.swing.JPanel {
     private ManageExercises manageExercises;
     private CreateExercise createExercise;
     private JComboBox jComboBoxDetails;
+    private JMenuBar menuBar;
 
     public MainAfterLogin(Main main) {
         this.main = main;
         initComponents();
         setSize(800, 600);
         setBackground(new Color(240, 240, 240));
+        menuBar = new JMenuBar();
+        add(menuBar);
 
         createWorkouts = new CreateWorkouts(this);
         add(createWorkouts);
@@ -82,7 +92,7 @@ public class MainAfterLogin extends javax.swing.JPanel {
         manageExercises.setBounds(455, 85, 295, 440);
         createExercise.setBounds(455, 85, 295, 440);
         jLabelIcon.setBounds(450, 95, 300, 330);
-        jButtonSignOut.setBounds(690, 15, 80, 25);
+        menuBar.setBounds(700, 15, 45, 33);
 
         jListShowUsers = new JList<>();
         jListShowUsers.setLayoutOrientation(JList.VERTICAL_WRAP);
@@ -111,6 +121,8 @@ public class MainAfterLogin extends javax.swing.JPanel {
                 resizeInternalPanels();
             }
         });
+
+        setMenu();
     }
 
     @SuppressWarnings("unchecked")
@@ -123,7 +135,6 @@ public class MainAfterLogin extends javax.swing.JPanel {
         jButtonManageExercises = new javax.swing.JButton();
         jLabelIcon = new javax.swing.JLabel();
         jButtonCreateWorkout = new javax.swing.JButton();
-        jButtonSignOut = new javax.swing.JButton();
         jLabelChooseUser = new javax.swing.JLabel();
         jLabelChooseWorkout = new javax.swing.JLabel();
         jLabelExerciseDetails = new javax.swing.JLabel();
@@ -172,17 +183,6 @@ public class MainAfterLogin extends javax.swing.JPanel {
         });
         add(jButtonCreateWorkout);
         jButtonCreateWorkout.setBounds(380, 130, 140, 30);
-
-        jButtonSignOut.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonSignOut.setText("Sign out");
-        jButtonSignOut.setFocusPainted(false);
-        jButtonSignOut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSignOutActionPerformed(evt);
-            }
-        });
-        add(jButtonSignOut);
-        jButtonSignOut.setBounds(685, 10, 100, 23);
 
         jLabelChooseUser.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelChooseUser.setText("Choose user:");
@@ -236,10 +236,6 @@ public class MainAfterLogin extends javax.swing.JPanel {
         createWorkouts.fillComboBoxUsers(main.getId());
     }//GEN-LAST:event_jButtonCreateWorkoutActionPerformed
 
-    private void jButtonSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignOutActionPerformed
-        main.setLogOut();
-    }//GEN-LAST:event_jButtonSignOutActionPerformed
-
     private void jButtonCreateExerciseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateExerciseActionPerformed
         jLabelIcon.setVisible(false);
         manageExercises.setVisible(false);
@@ -252,7 +248,6 @@ public class MainAfterLogin extends javax.swing.JPanel {
     private javax.swing.JButton jButtonCreateExercise;
     private javax.swing.JButton jButtonCreateWorkout;
     private javax.swing.JButton jButtonManageExercises;
-    private javax.swing.JButton jButtonSignOut;
     private javax.swing.JLabel jLabelChooseUser;
     private javax.swing.JLabel jLabelChooseWorkout;
     private javax.swing.JLabel jLabelComments;
@@ -353,6 +348,41 @@ public class MainAfterLogin extends javax.swing.JPanel {
                 jListShowUsers.repaint(); // Forzar re-renderización
             }
         });
+    }
+
+    private void setMenu() {
+        JMenu jMenu = new JMenu();
+        ImageIcon menuIcon = new ImageIcon(getClass().getResource("/images/MenuIcon.png"));
+        jMenu.setIcon(menuIcon); // Establecer el icono en lugar del texto
+        jMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                jMenu.setOpaque(true);
+                jMenu.setBackground(new Color(220, 220, 220));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                jMenu.setOpaque(false);
+                jMenu.setBackground(null);
+            }
+        });
+        JMenuItem exitMenuItem = new JMenuItem("<html>Sign out<hr></html>");
+        exitMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                main.setLogOut();
+            }
+        });
+
+        JMenuItem contactMenuItem = new JMenuItem("<html>Contact<hr></html>");
+        contactMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Contact us: info@myfitty.com", "Contact", JOptionPane.PLAIN_MESSAGE);;
+            }
+        });
+        jMenu.add(exitMenuItem);
+        jMenu.add(contactMenuItem);
+        menuBar.add(jMenu);
     }
 
     private void resizeInternalPanels() {
