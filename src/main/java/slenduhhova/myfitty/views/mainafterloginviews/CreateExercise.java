@@ -201,6 +201,8 @@ public class CreateExercise extends javax.swing.JPanel {
         }
     }
 
+    // Código generado con la ayuda de ChatGPT el 27 de enero de 2025.
+    // Fuente: ChatGPT, OpenAI.
     private void setupLayout() {
 
         setLayout(new MigLayout("wrap 2", "[align right][grow,fill]", "[]20[]15[]15[]20[]20[]"));

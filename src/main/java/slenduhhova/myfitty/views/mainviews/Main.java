@@ -36,6 +36,9 @@ public class Main extends javax.swing.JFrame {
     private NewUser newUser;
 
     public Main() {
+        
+        // Código generado con la ayuda de ChatGPT el 29 de enero de 2025.
+        // Fuente: ChatGPT, OpenAI.
         try {
             UIManager.setLookAndFeel(new GraphiteLookAndFeel()); 
             SwingUtilities.updateComponentTreeUI(new JFrame());

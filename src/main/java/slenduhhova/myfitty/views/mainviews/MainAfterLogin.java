@@ -354,6 +354,8 @@ public class MainAfterLogin extends javax.swing.JPanel {
         });
     }
 
+    // Código generado con la ayuda de ChatGPT el 29 de enero de 2025.
+    // Fuente: ChatGPT, OpenAI.
     private void setMenu() {
         JMenu jMenu = new JMenu();
         ImageIcon menuIcon = new ImageIcon(getClass().getResource("/images/MenuIcon.png"));
@@ -401,7 +403,7 @@ public class MainAfterLogin extends javax.swing.JPanel {
         jLabelIcon.setVisible(true);
     }
 
-    public javax.swing.JLabel getjLabelWelcomeNameOfInstructor() {
+    public JLabel getjLabelWelcomeNameOfInstructor() {
         return jLabelWelcomeNameOfInstructor;
     }
 

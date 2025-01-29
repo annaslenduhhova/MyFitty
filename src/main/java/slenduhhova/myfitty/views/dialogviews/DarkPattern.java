@@ -25,6 +25,8 @@ public class DarkPattern extends javax.swing.JDialog {
         //guardar el lookAndFeel de antes 
         String previousLookAndFeel = UIManager.getLookAndFeel().getClass().getName();
 
+        // Código generado con la ayuda de ChatGPT el 29 de enero de 2025.
+        // Fuente: ChatGPT, OpenAI.
         // Usar el lookAndFeel del sistema para quitar la barra de título con el botón de salir
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -32,6 +34,7 @@ public class DarkPattern extends javax.swing.JDialog {
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
+        
         this.setUndecorated(true);
         getRootPane().setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         initComponents();

@@ -32,6 +32,8 @@ public class Login extends javax.swing.JDialog {
         jLabelHelp.setText("<html>Forgot Your password or need any help?<br>Contact us: <font color='#00008B'>help@myfitty.com</font></html>");
         jProgressBarEnter.setVisible(false);
 
+        // Código generado con la ayuda de ChatGPT el 29 de enero de 2025.
+        // Fuente: ChatGPT, OpenAI.
         jTextFieldEmail.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -172,6 +174,8 @@ public class Login extends javax.swing.JDialog {
         jProgressBarEnter.setIndeterminate(true);
         jButtonEnter.setEnabled(false);
 
+        // Código generado con la ayuda de ChatGPT el 29 de enero de 2025.
+        // Fuente: ChatGPT, OpenAI.
         SwingWorker<Boolean, Void> worker = new SwingWorker<>() {
             private Usuari usuari;
             private boolean loginSuccess = false;
