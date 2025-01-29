@@ -31,7 +31,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabelExcercises" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPaneExcercises" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="jScrollPaneExcercises" min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -90,11 +90,14 @@
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Component id="jLabelExcercises" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPaneExcercises" min="-2" pref="62" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                      <Component id="jScrollPaneExcercises" min="-2" pref="59" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jButtonCreateWorkout" min="-2" max="-2" attributes="0"/>
@@ -146,6 +149,9 @@
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPaneExcercises">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="cc" red="ff" type="rgb"/>
+        </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Default Cursor"/>
         </Property>
@@ -187,6 +193,9 @@
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPaneUserName">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="cc" red="ff" type="rgb"/>
+        </Property>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="jScrollPaneComments"/>
         </Property>

@@ -1,6 +1,5 @@
 slenduhhova\myfitty\views\mainviews\MainAfterLogin$1.class
 slenduhhova\myfitty\views\mainviews\MainAfterLogin$8.class
-slenduhhova\myfitty\views\mainafterloginviews\CreateExercise$4.class
 slenduhhova\myfitty\views\mainafterloginviews\ManageExercises$4.class
 slenduhhova\myfitty\views\mainviews\Main$4.class
 slenduhhova\myfitty\dto\Usuari.class
@@ -10,6 +9,7 @@ slenduhhova\myfitty\views\mainviews\MainAfterLogin$10.class
 slenduhhova\myfitty\views\mainafterloginviews\ManageExercises$1.class
 slenduhhova\myfitty\dataaccess\DataAccess.class
 slenduhhova\myfitty\views\mainviews\MainAfterLogin$7.class
+slenduhhova\myfitty\views\dialogviews\Window.class
 slenduhhova\myfitty\views\mainviews\Main$1.class
 slenduhhova\myfitty\views\mainafterloginviews\ManageExercises$3.class
 slenduhhova\myfitty\views\dialogviews\Login.class
@@ -39,7 +39,6 @@ slenduhhova\myfitty\views\mainviews\Main$2.class
 slenduhhova\myfitty\views\mainafterloginviews\CreateExercise$3.class
 slenduhhova\myfitty\views\mainviews\Main.class
 slenduhhova\myfitty\views\dialogviews\Login$2.class
-slenduhhova\myfitty\views\mainviews\MainAfterLogin$12.class
 slenduhhova\myfitty\views\mainviews\MainAfterLogin$9.class
 slenduhhova\myfitty\views\mainafterloginviews\CreateWorkouts$3.class
 slenduhhova\myfitty\views\mainviews\MainBeforeLogin$3.class

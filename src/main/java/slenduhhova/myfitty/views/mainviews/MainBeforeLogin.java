@@ -30,7 +30,7 @@ public class MainBeforeLogin extends javax.swing.JPanel {
 
         int buttonX = (getWidth() - 117) / 2;
         jButtonLogin.setBounds(buttonX, 368, 117, 47);
-        jButtonRegisterUser.setBounds(333, 460, 130, 30);
+        jButtonRegisterUser.setBounds(333, 460, 130, 35);
     }
 
     @SuppressWarnings("unchecked")
@@ -50,7 +50,7 @@ public class MainBeforeLogin extends javax.swing.JPanel {
         add(jLabelIcon);
         jLabelIcon.setBounds(119, 51, 158, 160);
 
-        jLabelHyperlink.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabelHyperlink.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabelHyperlink.setText("www.fitty.com");
         jLabelHyperlink.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelHyperlink.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -65,7 +65,7 @@ public class MainBeforeLogin extends javax.swing.JPanel {
             }
         });
         add(jLabelHyperlink);
-        jLabelHyperlink.setBounds(151, 217, 110, 22);
+        jLabelHyperlink.setBounds(151, 217, 110, 19);
 
         jButtonLogin.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jButtonLogin.setText("LOGIN");
@@ -104,7 +104,7 @@ public class MainBeforeLogin extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelHyperlinkMouseClicked
 
     private void jLabelHyperlinkMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHyperlinkMouseEntered
-        jLabelHyperlink.setText("<html><a href='' style=\"color:#FF4500;\">" + jLabelHyperlink.getText() + "</a></html>");
+        jLabelHyperlink.setText("<html><a href='' style=\"color:#ef6c00;\">" + jLabelHyperlink.getText() + "</a></html>");
     }//GEN-LAST:event_jLabelHyperlinkMouseEntered
 
     private void jLabelHyperlinkMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHyperlinkMouseExited

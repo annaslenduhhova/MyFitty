@@ -23,7 +23,6 @@ import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionListener;
 import slenduhhova.myfitty.dataaccess.DataAccess;
 import slenduhhova.myfitty.views.mainafterloginviews.CreateWorkouts;
@@ -53,7 +52,7 @@ public class MainAfterLogin extends javax.swing.JPanel {
         initComponents();
         setSize(800, 600);
         setBackground(new Color(240, 240, 240));
-        
+
         menuBar = new JMenuBar();
         add(menuBar);
 
@@ -77,12 +76,12 @@ public class MainAfterLogin extends javax.swing.JPanel {
         jComboBoxDetails.setVisible(false);
 
         int welcomeX = (getWidth() - 306) / 2;
-        jLabelWelcomeNameOfInstructor.setBounds(welcomeX, 30, 306, 37);
-        jScrollPaneListUsers.setBounds(60, 140, 130, 70);
-        jScrollPaneListWorkouts.setBounds(60, 270, 102, 32);
-        jLabelDate.setBounds(60, 360, 80, 45);
+        jLabelWelcomeNameOfInstructor.setBounds(welcomeX, 15, 306, 37);
+        jScrollPaneListUsers.setBounds(60, 140, 106, 70);
+        jScrollPaneListWorkouts.setBounds(60, 270, 106, 32);
+        jLabelDate.setBounds(60, 360, 82, 45);
         jLabelComments.setBounds(160, 360, 140, 45);
-        jComboBoxDetails.setBounds(60, 410, 240, 40);
+        jComboBoxDetails.setBounds(60, 410, 240, 37);
         jLabelChooseUser.setBounds(60, 110, 140, 15);
         jLabelChooseWorkout.setBounds(60, 240, 140, 15);
         jLabelExerciseDetails.setBounds(60, 330, 230, 15);
@@ -93,10 +92,10 @@ public class MainAfterLogin extends javax.swing.JPanel {
         manageExercises.setBounds(455, 85, 295, 440);
         createExercise.setBounds(455, 85, 295, 440);
         jLabelIcon.setBounds(450, 95, 300, 330);
-        menuBar.setBounds(700, 15, 45, 33);
+        menuBar.setBounds(690, 15, 45, 33);
 
         jListShowUsers = new JList<>();
-        jListShowUsers.setLayoutOrientation(JList.VERTICAL_WRAP);
+        jListShowUsers.setLayoutOrientation(JList.VERTICAL);
         jScrollPaneListUsers.setViewportView(jListShowUsers);
         jListShowUsers.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -154,6 +153,8 @@ public class MainAfterLogin extends javax.swing.JPanel {
         jLabelWelcomeNameOfInstructor.setBounds(45, 26, 306, 37);
         add(jScrollPaneListUsers);
         jScrollPaneListUsers.setBounds(90, 130, 110, 65);
+
+        jScrollPaneListWorkouts.setBackground(new java.awt.Color(255, 204, 51));
         add(jScrollPaneListWorkouts);
         jScrollPaneListWorkouts.setBounds(90, 250, 49, 30);
 
@@ -200,12 +201,11 @@ public class MainAfterLogin extends javax.swing.JPanel {
         add(jLabelExerciseDetails);
         jLabelExerciseDetails.setBounds(90, 310, 200, 20);
 
-        jLabelDate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabelDate.setBorder(javax.swing.BorderFactory.createTitledBorder("Date"));
+        jLabelDate.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Date", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         add(jLabelDate);
         jLabelDate.setBounds(90, 330, 120, 40);
 
-        jLabelComments.setBorder(javax.swing.BorderFactory.createTitledBorder("Comments"));
+        jLabelComments.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Comments", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         add(jLabelComments);
         jLabelComments.setBounds(100, 380, 120, 23);
 
@@ -213,13 +213,16 @@ public class MainAfterLogin extends javax.swing.JPanel {
         jButtonCreateExercise.setText("New exercise");
         jButtonCreateExercise.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButtonCreateExercise.setFocusPainted(false);
+        jButtonCreateExercise.setMaximumSize(new java.awt.Dimension(125, 21));
+        jButtonCreateExercise.setMinimumSize(new java.awt.Dimension(125, 21));
+        jButtonCreateExercise.setPreferredSize(new java.awt.Dimension(125, 21));
         jButtonCreateExercise.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCreateExerciseActionPerformed(evt);
             }
         });
         add(jButtonCreateExercise);
-        jButtonCreateExercise.setBounds(380, 170, 140, 30);
+        jButtonCreateExercise.setBounds(380, 180, 140, 30);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonManageExercisesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManageExercisesActionPerformed
@@ -312,13 +315,13 @@ public class MainAfterLogin extends javax.swing.JPanel {
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
-                // Cambiar el fondo si el índice coincide con el que tiene el ratón encima
                 if (index == hoveredIndex[0]) {
-                    label.setBackground(new Color(220, 220, 220)); // Azul oscuro para hover
+                    label.setBackground(new Color(180, 220, 220));
                 } else if (isSelected) {
-                    label.setBackground(new Color(180, 220, 220)); // Color para elementos seleccionados
+                    label.setBackground(new Color(255, 204, 51));
+                    label.setForeground(Color.black);
                 } else {
-                    label.setBackground(Color.WHITE); // Fondo por defecto
+                    label.setBackground(Color.WHITE);
                 }
 
                 label.setOpaque(true); // Hacer visible el fondo
@@ -368,21 +371,14 @@ public class MainAfterLogin extends javax.swing.JPanel {
                 jMenu.setBackground(null);
             }
         });
-        JMenuItem exitMenuItem = new JMenuItem("<html>Sign out<hr></html>");
+        JMenuItem exitMenuItem = new JMenuItem("Sign out");
         exitMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 main.setLogOut();
             }
         });
 
-        JMenuItem contactMenuItem = new JMenuItem("<html>Contact<hr></html>");
-        contactMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Contact us: info@myfitty.com", "Contact", JOptionPane.PLAIN_MESSAGE);;
-            }
-        });
         jMenu.add(exitMenuItem);
-        jMenu.add(contactMenuItem);
         menuBar.add(jMenu);
     }
 

@@ -17,7 +17,12 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
     </properties>
-    <dependencies>
+    <dependencies>   
+        <dependency>
+            <groupId>com.jtattoo</groupId>
+            <artifactId>JTattoo</artifactId>
+            <version>1.6.13</version>
+        </dependency>  
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>

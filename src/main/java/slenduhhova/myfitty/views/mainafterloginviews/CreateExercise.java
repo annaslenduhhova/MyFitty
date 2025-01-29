@@ -67,7 +67,6 @@ public class CreateExercise extends javax.swing.JPanel {
         jTextFieldDescription = new javax.swing.JTextField();
         jButtonCreate = new javax.swing.JButton();
         jLabelNewExercise = new javax.swing.JLabel();
-        jButtonGoBack = new javax.swing.JButton();
         jButtonFoto = new javax.swing.JButton();
 
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -113,19 +112,6 @@ public class CreateExercise extends javax.swing.JPanel {
         jLabelNewExercise.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNewExercise.setText("Enter new exercise details");
 
-        jButtonGoBack.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonGoBack.setText("Go back");
-        jButtonGoBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonGoBack.setMaximumSize(new java.awt.Dimension(100, 30));
-        jButtonGoBack.setMinimumSize(new java.awt.Dimension(80, 20));
-        jButtonGoBack.setPreferredSize(new java.awt.Dimension(90, 25));
-        jButtonGoBack.setRequestFocusEnabled(false);
-        jButtonGoBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonGoBackActionPerformed(evt);
-            }
-        });
-
         jButtonFoto.setText("Choose photo");
         jButtonFoto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -153,10 +139,6 @@ public class CreateExercise extends javax.swing.JPanel {
                         .addGap(29, 29, 29)
                         .addComponent(jButtonCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(71, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jButtonGoBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,9 +159,7 @@ public class CreateExercise extends javax.swing.JPanel {
                     .addComponent(jButtonFoto))
                 .addGap(28, 28, 28)
                 .addComponent(jButtonCreate, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonGoBack, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                .addGap(194, 194, 194))
+                .addGap(280, 280, 280))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -187,15 +167,10 @@ public class CreateExercise extends javax.swing.JPanel {
         addNewExercise();
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
-    private void jButtonGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGoBackActionPerformed
-        mainAfterLogin.goBackToManageExercises();
-    }//GEN-LAST:event_jButtonGoBackActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCreate;
     private javax.swing.JButton jButtonFoto;
-    private javax.swing.JButton jButtonGoBack;
     private javax.swing.JLabel jLabelDescription;
     private javax.swing.JLabel jLabelFoto;
     private javax.swing.JLabel jLabelName;
@@ -237,9 +212,9 @@ public class CreateExercise extends javax.swing.JPanel {
         add(jTextFieldDescription, "growx, growy, hmin 25, wmin 100, wmax 900");
         add(jLabelFoto);
         add(jButtonFoto, "growx, wmin 100, wmax 900");
-        add(jLabelPreviewPhoto, "span 2, center, gaptop 10, growx, growy, hmin 35, wmin 25, hmax 55, wmax 55");
-        add(jButtonCreate, "span 2, center, gaptop 15");
-        add(jButtonGoBack, "span 2, center, gaptop 15");
+        add(jLabelPreviewPhoto, "span 2, center, gaptop 20, growx, growy, hmin 35, wmin 25, hmax 55, wmax 55");
+        add(jButtonCreate, "span 2, center, gaptop 25");
+
     }
 
     private void choosePhoto() {

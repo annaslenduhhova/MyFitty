@@ -50,11 +50,6 @@
               </Group>
               <EmptySpace pref="71" max="32767" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-              <Component id="jButtonGoBack" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -79,9 +74,7 @@
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="jButtonCreate" pref="90" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButtonGoBack" pref="80" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -166,28 +159,6 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Enter new exercise details"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButtonGoBack">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Go back"/>
-        <Property name="horizontalTextPosition" type="int" value="0"/>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[100, 30]"/>
-        </Property>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[80, 20]"/>
-        </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[90, 25]"/>
-        </Property>
-        <Property name="requestFocusEnabled" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonGoBackActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonFoto">
       <Properties>

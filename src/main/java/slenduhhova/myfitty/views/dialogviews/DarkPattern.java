@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import slenduhhova.myfitty.views.mainviews.Main;
 
 /**
@@ -14,31 +16,49 @@ import slenduhhova.myfitty.views.mainviews.Main;
  */
 public class DarkPattern extends javax.swing.JDialog {
 
-    Main main;
+    private Main main;
 
     public DarkPattern(Main main) {
         super(main, true);
-        this.main=main;
-        setUndecorated(true);
+        this.main = main;
+
+        //guardar el lookAndFeel de antes 
+        String previousLookAndFeel = UIManager.getLookAndFeel().getClass().getName();
+
+        // Usar el lookAndFeel del sistema para quitar la barra de título con el botón de salir
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        this.setUndecorated(true);
         getRootPane().setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/images/icono.png")).getImage());
         setSize(400, 300);
         getContentPane().setBackground(new Color(255, 255, 240));
-        setLocationRelativeTo(main);  
+        setLocationRelativeTo(main);
 
         jButtonAccept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String email = jTextFieldEmail.getText();
                 if (!email.isEmpty()) {
-                    JOptionPane.showMessageDialog(main, "Thank You for Your subscription!");
+                    JOptionPane.showMessageDialog(null, "Thank You for Your subscription!");
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(main, "Please, enter Your email.");
+                    JOptionPane.showMessageDialog(null, "Please, enter Your email.");
                 }
             }
-        });               
+        });
+
+        //restablecer el lookAndFeel de antes
+        try {
+            UIManager.setLookAndFeel(previousLookAndFeel);
+            SwingUtilities.updateComponentTreeUI(main);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -55,9 +75,7 @@ public class DarkPattern extends javax.swing.JDialog {
         jButtonAccept = new javax.swing.JButton();
         jButtonExit = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setForeground(new java.awt.Color(255, 255, 204));
-        setModal(true);
 
         jLabelSubsribe.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelSubsribe.setForeground(new java.awt.Color(204, 51, 0));
@@ -66,6 +84,7 @@ public class DarkPattern extends javax.swing.JDialog {
         jLabelSubsribe.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jTextFieldEmail.setBackground(new java.awt.Color(255, 255, 240));
+        jTextFieldEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextFieldEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldEmail.setToolTipText("");
         jTextFieldEmail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ENTER YOUR EMAIL", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 102))); // NOI18N
@@ -121,7 +140,7 @@ public class DarkPattern extends javax.swing.JDialog {
                 .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jButtonAccept)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jButtonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -135,7 +154,6 @@ public class DarkPattern extends javax.swing.JDialog {
     private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonExitActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

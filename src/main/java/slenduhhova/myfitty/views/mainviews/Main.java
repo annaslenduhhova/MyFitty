@@ -1,5 +1,6 @@
 package slenduhhova.myfitty.views.mainviews;
 
+import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
 import java.awt.AWTKeyStroke;
 import java.awt.Color;
 import java.awt.KeyboardFocusManager;
@@ -10,11 +11,13 @@ import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
-import slenduhhova.myfitty.views.dialogviews.DarkPattern;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import slenduhhova.myfitty.views.dialogviews.NewUser;
 import slenduhhova.myfitty.views.dialogviews.HelpDialog;
 import slenduhhova.myfitty.views.dialogviews.Login;
@@ -33,6 +36,12 @@ public class Main extends javax.swing.JFrame {
     private NewUser newUser;
 
     public Main() {
+        try {
+            UIManager.setLookAndFeel(new GraphiteLookAndFeel()); 
+            SwingUtilities.updateComponentTreeUI(new JFrame());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         initComponents();
         this.setSize(800, 600);
         this.setLocationRelativeTo(null);
@@ -55,7 +64,7 @@ public class Main extends javax.swing.JFrame {
                 .getDefaultFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));
         forwardKeys.add(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
         KeyboardFocusManager.getCurrentKeyboardFocusManager().setDefaultFocusTraversalKeys(
-                KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, forwardKeys);
+                KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, forwardKeys);       
     }
 
     @SuppressWarnings("unchecked")

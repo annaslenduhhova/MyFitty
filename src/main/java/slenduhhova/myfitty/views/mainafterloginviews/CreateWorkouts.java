@@ -42,7 +42,7 @@ public class CreateWorkouts extends javax.swing.JPanel {
 
         jLabelCalendario.setText(formatDate());
         jListExercises = new JList<>();
-        jListExercises.setLayoutOrientation(JList.VERTICAL_WRAP);
+        jListExercises.setLayoutOrientation(JList.VERTICAL);
         jListExercises.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jScrollPaneExcercises.setViewportView(jListExercises);
 
@@ -92,6 +92,7 @@ public class CreateWorkouts extends javax.swing.JPanel {
         jLabelExcercises.setText("Exercises:");
         jLabelExcercises.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jScrollPaneExcercises.setBackground(new java.awt.Color(255, 204, 51));
         jScrollPaneExcercises.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPaneExcercises.setNextFocusableComponent(jButtonCreateWorkout);
 
@@ -108,6 +109,7 @@ public class CreateWorkouts extends javax.swing.JPanel {
             }
         });
 
+        jScrollPaneUserName.setBackground(new java.awt.Color(255, 204, 51));
         jScrollPaneUserName.setNextFocusableComponent(jScrollPaneComments);
 
         jButtonCalendario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Calendar.png"))); // NOI18N
@@ -146,7 +148,7 @@ public class CreateWorkouts extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPaneExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPaneExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,7 +193,9 @@ public class CreateWorkouts extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jLabelExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPaneExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jScrollPaneExcercises, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonCreateWorkout)
                 .addGap(17, 17, 17))
