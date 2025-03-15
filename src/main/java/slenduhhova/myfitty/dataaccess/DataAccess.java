@@ -23,9 +23,11 @@ import slenduhhova.myfitty.dto.Workout;
         Connection connection = null;
         Properties properties = new Properties();
         try {
-            properties.load(DataAccess.class.getClassLoader().getResourceAsStream("properties/application.properties"));                      
+            properties.load(DataAccess.class.getClassLoader().getResourceAsStream("properties/application.properties"));
             String connectionUrl = properties.getProperty("connectionUrl");
-            connection = DriverManager.getConnection(connectionUrl);                            
+            System.out.println("Connecting to: " + connectionUrl);
+
+            connection = DriverManager.getConnection(connectionUrl);
         }catch (Exception e) {
             e.printStackTrace();
         }

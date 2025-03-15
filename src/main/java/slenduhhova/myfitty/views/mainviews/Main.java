@@ -36,11 +36,11 @@ public class Main extends javax.swing.JFrame {
     private NewUser newUser;
 
     public Main() {
-        
+
         // Código generado con la ayuda de ChatGPT el 29 de enero de 2025.
         // Fuente: ChatGPT, OpenAI.
         try {
-            UIManager.setLookAndFeel(new GraphiteLookAndFeel()); 
+            UIManager.setLookAndFeel(new GraphiteLookAndFeel());
             SwingUtilities.updateComponentTreeUI(new JFrame());
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,11 +63,13 @@ public class Main extends javax.swing.JFrame {
 
         setMenu();
 
+        // Código generado con la ayuda de ChatGPT el 27 de enero de 2025.
+        // Fuente: ChatGPT, OpenAI.
         Set<AWTKeyStroke> forwardKeys = new HashSet<>(KeyboardFocusManager.getCurrentKeyboardFocusManager()
                 .getDefaultFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));
         forwardKeys.add(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
         KeyboardFocusManager.getCurrentKeyboardFocusManager().setDefaultFocusTraversalKeys(
-                KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, forwardKeys);       
+                KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, forwardKeys);
     }
 
     @SuppressWarnings("unchecked")
