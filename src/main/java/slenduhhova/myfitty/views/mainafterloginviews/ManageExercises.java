@@ -9,6 +9,13 @@ import slenduhhova.myfitty.dto.Exercici;
 import slenduhhova.myfitty.views.mainviews.MainAfterLogin;
 
 /**
+ * JPanel que permite la gestión de ejercicios. Este panel permite al usuario
+ * seleccionar un ejercicio de una lista y modificar su nombre, descripción o
+ * foto. Además, permite eliminar ejercicios de la base de datos.
+ *
+ * El panel incluye una lista de ejercicios, un combo box para seleccionar un
+ * ejercicio, botones para modificar los atributos del ejercicio seleccionado
+ * (nombre, descripción, foto) y un botón para eliminar el ejercicio.
  *
  * @author annas
  */
@@ -17,6 +24,14 @@ public class ManageExercises extends javax.swing.JPanel {
     private MainAfterLogin mainAfterLogin;
     private JComboBox<Exercici> jComboBoxShowAllExercises;
 
+    /**
+     * Constructor que inicializa el panel y configura los componentes de la
+     * interfaz. Este constructor también rellena el combo box con todos los
+     * ejercicios disponibles.
+     *
+     * @param mainAfterLogin El marco principal después del inicio de sesión,
+     * pasado para gestionar las acciones posteriores al inicio de sesión.
+     */
     public ManageExercises(MainAfterLogin mainAfterLogin) {
         this.mainAfterLogin = mainAfterLogin;
         initComponents();
@@ -169,18 +184,42 @@ public class ManageExercises extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción que se ejecuta cuando se hace clic en el botón "Modificar nombre".
+     * Llama al método `modifyName()`.
+     *
+     * @param evt El evento de acción generado por el clic del usuario.
+     */
     private void jButtonModifyNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyNameActionPerformed
         modifyName();
     }//GEN-LAST:event_jButtonModifyNameActionPerformed
 
+    /**
+     * Acción que se ejecuta cuando se hace clic en el botón "Modificar
+     * descripción". Llama al método `modifyDescription()`.
+     *
+     * @param evt El evento de acción generado por el clic del usuario.
+     */
     private void jButtonModifyDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyDescriptionActionPerformed
         modifyDescription();
     }//GEN-LAST:event_jButtonModifyDescriptionActionPerformed
 
+    /**
+     * Acción que se ejecuta cuando se hace clic en el botón "Modificar foto".
+     * Llama al método `modifyFoto()`.
+     *
+     * @param evt El evento de acción generado por el clic del usuario.
+     */
     private void jButtonModifyFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyFotoActionPerformed
         modifyFoto();
     }//GEN-LAST:event_jButtonModifyFotoActionPerformed
 
+    /**
+     * Acción que se ejecuta cuando se hace clic en el botón "Eliminar
+     * ejercicio". Llama al método `deleteExercise()`.
+     *
+     * @param evt El evento de acción generado por el clic del usuario.
+     */
     private void jButtonDeleteExerciseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteExerciseActionPerformed
         deleteExercise();
     }//GEN-LAST:event_jButtonDeleteExerciseActionPerformed
@@ -201,6 +240,10 @@ public class ManageExercises extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Rellena el combo box con todos los ejercicios disponibles en la base de
+     * datos.
+     */
     private void showAllExercises() {
 
         ArrayList<Exercici> exercicis = DataAccess.getAllExercicis();
@@ -209,6 +252,12 @@ public class ManageExercises extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Modifica el nombre del ejercicio seleccionado. Toma el nuevo nombre del
+     * campo de texto y lo actualiza en la base de datos. Si la actualización es
+     * exitosa, muestra un mensaje de éxito; si ocurre un error, muestra un
+     * mensaje de error.
+     */
     private void modifyName() {
 
         Exercici exercise = (Exercici) jComboBoxShowAllExercises.getSelectedItem();
@@ -224,6 +273,12 @@ public class ManageExercises extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Modifica la descripción del ejercicio seleccionado. Toma la nueva
+     * descripción del campo de texto y la actualiza en la base de datos. Si la
+     * actualización es exitosa, muestra un mensaje de éxito; si ocurre un
+     * error, muestra un mensaje de error.
+     */
     private void modifyDescription() {
 
         Exercici exercise = (Exercici) jComboBoxShowAllExercises.getSelectedItem();
@@ -239,6 +294,12 @@ public class ManageExercises extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Modifica la foto del ejercicio seleccionado. Toma la nueva URL o ruta de
+     * la foto del campo de texto y la actualiza en la base de datos. Si la
+     * actualización es exitosa, muestra un mensaje de éxito; si ocurre un
+     * error, muestra un mensaje de error.
+     */
     private void modifyFoto() {
 
         Exercici exercise = (Exercici) jComboBoxShowAllExercises.getSelectedItem();
@@ -254,6 +315,12 @@ public class ManageExercises extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Elimina el ejercicio seleccionado de la base de datos. Si la eliminación
+     * es exitosa, muestra un mensaje de éxito; si no se puede eliminar el
+     * ejercicio porque está asignado a un entrenamiento, muestra un mensaje de
+     * error.
+     */
     private void deleteExercise() {
 
         Exercici exercise = (Exercici) jComboBoxShowAllExercises.getSelectedItem();

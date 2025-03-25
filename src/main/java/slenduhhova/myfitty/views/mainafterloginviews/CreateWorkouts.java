@@ -24,6 +24,14 @@ import slenduhhova.myfitty.dto.Workout;
 import slenduhhova.myfitty.views.mainviews.MainAfterLogin;
 
 /**
+ * JPanel que permite la creación de un entrenamiento. Este panel permite al
+ * usuario seleccionar una fecha, un usuario, ejercicios y agregar comentarios
+ * al entrenamiento. Una vez que todos los detalles estén completos, el usuario
+ * puede crear un nuevo entrenamiento.
+ *
+ * El panel incluye una lista de ejercicios, un combo box para seleccionar un
+ * usuario, un botón de calendario para elegir una fecha y un área de texto para
+ * ingresar comentarios sobre el entrenamiento.
  *
  * @author annas
  */
@@ -34,6 +42,14 @@ public class CreateWorkouts extends javax.swing.JPanel {
     private ArrayList<Exercici> exercicis;
     private JComboBox<Object> jComboBoxShowAllUsers;
 
+    /**
+     * Constructor que inicializa el panel y configura los componentes de la
+     * interfaz. Este constructor también establece la fecha y llena la lista de
+     * ejercicios.
+     *
+     * @param mainAfterLogin El marco principal después del inicio de sesión,
+     * pasado para gestionar las acciones posteriores al inicio de sesión.
+     */
     public CreateWorkouts(MainAfterLogin mainAfterLogin) {
         this.mainAfterLogin = mainAfterLogin;
         initComponents();
@@ -202,6 +218,13 @@ public class CreateWorkouts extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * ActionListener para el botón "Crear". Cuando se hace clic, crea un nuevo
+     * entrenamiento y lo guarda en la base de datos.
+     *
+     * @param evt El evento de acción que se activa cuando el botón es
+     * presionado.
+     */
     private void jButtonCreateWorkoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateWorkoutActionPerformed
         try {
             insertWorkout();
@@ -214,6 +237,14 @@ public class CreateWorkouts extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonCreateWorkoutActionPerformed
 
+    /**
+     * Abre una ventana de calendario cuando se hace clic en el botón del
+     * calendario. El usuario puede seleccionar una fecha. Después de
+     * seleccionar la fecha, se actualiza la etiqueta con la fecha elegida.
+     *
+     * @param evt El evento de acción que se activa cuando el botón es
+     * presionado.
+     */
     private void jButtonCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalendarioActionPerformed
         JFrame calendarFrame = new JFrame("Select Date");
         calendarFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -248,6 +279,12 @@ public class CreateWorkouts extends javax.swing.JPanel {
     private javax.swing.JTextArea jTextAreaComments;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Crea un objeto Workout con la fecha seleccionada, el usuario y los
+     * comentarios.
+     *
+     * @return El nuevo objeto Workout creado.
+     */
     private Workout createWorkout() {
 
         String date = formatDateToSql();
@@ -263,6 +300,14 @@ public class CreateWorkouts extends javax.swing.JPanel {
         return workout;
     }
 
+    /**
+     * Convierte la fecha seleccionada desde la etiqueta al formato compatible
+     * con SQL (yyyy-MM-dd HH:mm:ss.SSSSSSS).
+     *
+     * @return La fecha formateada en formato SQL.
+     * @throws IllegalArgumentException Si el formato de la fecha en la etiqueta
+     * no es correcto.
+     */
     private String formatDateToSql() {
         try {
             String selectedDateText = jLabelCalendario.getText();
@@ -281,6 +326,13 @@ public class CreateWorkouts extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Rellena el combo box con todos los usuarios de la base de datos,
+     * permitiendo seleccionar un usuario para el entrenamiento.
+     *
+     * @param id El ID del instructor para obtener los usuarios asociados con
+     * él.
+     */
     public void fillComboBoxUsers(int id) {
 
         ArrayList<Usuari> usuaris = DataAccess.getAllUsersByInstructor(id);
@@ -290,6 +342,10 @@ public class CreateWorkouts extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Rellena la lista de ejercicios (`jListExercises`) con todos los
+     * ejercicios disponibles.
+     */
     private void fillListExcercises() {
 
         exercicis = DataAccess.getAllExercicis();
@@ -301,6 +357,11 @@ public class CreateWorkouts extends javax.swing.JPanel {
         jListExercises.setModel(model);
     }
 
+    /**
+     * Inserta un nuevo entrenamiento con los ejercicios seleccionados en la
+     * base de datos. Recoge los ejercicios seleccionados y los pasa al método
+     * `DataAccess.insertWorkout`.
+     */
     private void insertWorkout() {
 
         ArrayList<Exercici> selectedExercises = new ArrayList<>();
@@ -314,6 +375,11 @@ public class CreateWorkouts extends javax.swing.JPanel {
         DataAccess.insertWorkout(createWorkout(), selectedExercises);
     }
 
+    /**
+     * Devuelve la fecha actual formateada como una cadena (dd/MM/yyyy).
+     *
+     * @return La fecha actual como una cadena.
+     */
     private String formatDate() {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

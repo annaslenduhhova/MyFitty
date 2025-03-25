@@ -11,30 +11,42 @@ import javax.swing.UnsupportedLookAndFeelException;
 import slenduhhova.myfitty.views.mainviews.Main;
 
 /**
+ * Clase que representa un cuadro de diálogo de suscripción con una interfaz
+ * personalizada. Este diálogo solicita al usuario que ingrese su correo
+ * electrónico para suscribirse a ofertas exclusivas.
  *
  * @author annas
  */
 public class DarkPattern extends javax.swing.JDialog {
 
+    /**
+     * Referencia a la ventana principal de la aplicación.
+     */
     private Main main;
 
+    /**
+     * Crea una nueva instancia del diálogo de suscripción con un diseño
+     * personalizado.
+     *
+     * @param main La ventana principal de la aplicación.
+     */
     public DarkPattern(Main main) {
         super(main, true);
         this.main = main;
 
-        //guardar el lookAndFeel de antes 
+        // Guardar el LookAndFeel actual
         String previousLookAndFeel = UIManager.getLookAndFeel().getClass().getName();
 
         // Código generado con la ayuda de ChatGPT el 29 de enero de 2025.
         // Fuente: ChatGPT, OpenAI.
-        // Usar el lookAndFeel del sistema para quitar la barra de título con el botón de salir
+        // Usar el lookAndFeel del sistema para quitar la barra de título con el botón de cerrar
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             SwingUtilities.updateComponentTreeUI(this);
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        
+
         this.setUndecorated(true);
         getRootPane().setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         initComponents();
@@ -42,6 +54,7 @@ public class DarkPattern extends javax.swing.JDialog {
         getContentPane().setBackground(new Color(255, 255, 240));
         setLocationRelativeTo(main);
 
+        // Acción del botón "Subscribe"
         jButtonAccept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,7 +68,7 @@ public class DarkPattern extends javax.swing.JDialog {
             }
         });
 
-        //restablecer el lookAndFeel de antes
+        // Restaurar el LookAndFeel anterior
         try {
             UIManager.setLookAndFeel(previousLookAndFeel);
             SwingUtilities.updateComponentTreeUI(main);
@@ -150,10 +163,20 @@ public class DarkPattern extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Maneja la acción cuando el usuario presiona Enter en el campo de email.
+     *
+     * @param evt Evento de acción.
+     */
     private void jTextFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldEmailActionPerformed
 
+    /**
+     * Maneja la acción cuando el usuario presiona el botón de cerrar (X).
+     *
+     * @param evt Evento de acción.
+     */
     private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonExitActionPerformed

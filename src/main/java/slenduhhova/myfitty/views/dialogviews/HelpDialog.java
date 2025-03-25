@@ -5,6 +5,11 @@ import javax.swing.ImageIcon;
 import slenduhhova.myfitty.views.mainviews.Main;
 
 /**
+ * Clase que representa un cuadro de diálogo de ayuda, proporcionando
+ * información sobre los recursos utilizados en la aplicación.
+ *
+ * Muestra los créditos y las fuentes de imágenes utilizadas, con enlaces a sus
+ * respectivas licencias.
  *
  * @author annas
  */
@@ -12,6 +17,11 @@ public class HelpDialog extends javax.swing.JDialog {
 
     private Main main;
 
+    /**
+     * Constructor de la clase HelpDialog.
+     *
+     * @param main La ventana principal de la aplicación.
+     */
     public HelpDialog(Main main) {
         super(main, true);
         this.main = main;
@@ -55,6 +65,11 @@ public class HelpDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelResources;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * Establece el texto con los créditos y referencias a los recursos
+     * utilizados en la aplicación.
+     */
     private void setTextResources() {
         jLabelResources.setText("<html>Developed by: Slenduhhova Anna<br><br>"
                 + "Course: DAM_DI<br><br>"

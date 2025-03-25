@@ -33,13 +33,21 @@ import slenduhhova.myfitty.dto.Usuari;
 import slenduhhova.myfitty.dto.Workout;
 
 /**
+ * Clase principal del panel que se muestra después de iniciar sesión. Esta
+ * clase es responsable de mostrar la interfaz gráfica después de que el
+ * instructor se haya autenticado, y proporciona funcionalidades para gestionar
+ * usuarios, ejercicios y entrenamientos.
+ *
+ * El panel permite al instructor interactuar con los usuarios y gestionar los
+ * entrenamientos mediante la creación de nuevos entrenamientos y ejercicios,
+ * así como visualizar los detalles de los entrenamientos.
  *
  * @author annas
  */
 public class MainAfterLogin extends javax.swing.JPanel {
 
     private Main main;
-    private javax.swing.JList<Usuari> jListShowUsers;
+    private JList<Usuari> jListShowUsers;
     private JComboBox<Object> jComboBoxShowWorkouts;
     private CreateWorkouts createWorkouts;
     private ManageExercises manageExercises;
@@ -47,6 +55,12 @@ public class MainAfterLogin extends javax.swing.JPanel {
     private JComboBox jComboBoxDetails;
     private JMenuBar menuBar;
 
+    /**
+     * Constructor que inicializa la clase {@link MainAfterLogin} y sus
+     * componentes.
+     *
+     * @param main la instancia principal de la aplicación.
+     */
     public MainAfterLogin(Main main) {
         this.main = main;
         initComponents();
@@ -225,6 +239,12 @@ public class MainAfterLogin extends javax.swing.JPanel {
         jButtonCreateExercise.setBounds(380, 180, 140, 30);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que se ejecuta cuando se presiona el botón de gestionar
+     * ejercicios. Muestra el panel para gestionar los ejercicios.
+     *
+     * @param evt el evento del clic en el botón.
+     */
     private void jButtonManageExercisesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManageExercisesActionPerformed
         jLabelIcon.setVisible(false);
         createWorkouts.setVisible(false);
@@ -232,6 +252,12 @@ public class MainAfterLogin extends javax.swing.JPanel {
         manageExercises.setVisible(true);
     }//GEN-LAST:event_jButtonManageExercisesActionPerformed
 
+    /**
+     * Método que se ejecuta cuando se presiona el botón de crear un nuevo
+     * entrenamiento. Muestra el panel para crear un nuevo entrenamiento.
+     *
+     * @param evt el evento del clic en el botón.
+     */
     private void jButtonCreateWorkoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateWorkoutActionPerformed
         jLabelIcon.setVisible(false);
         manageExercises.setVisible(false);
@@ -240,6 +266,12 @@ public class MainAfterLogin extends javax.swing.JPanel {
         createWorkouts.fillComboBoxUsers(main.getId());
     }//GEN-LAST:event_jButtonCreateWorkoutActionPerformed
 
+    /**
+     * Método que se ejecuta cuando se presiona el botón de crear un nuevo
+     * ejercicio. Muestra el panel para crear un nuevo ejercicio.
+     *
+     * @param evt el evento del clic en el botón.
+     */
     private void jButtonCreateExerciseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateExerciseActionPerformed
         jLabelIcon.setVisible(false);
         manageExercises.setVisible(false);
@@ -263,6 +295,12 @@ public class MainAfterLogin extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPaneListWorkouts;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Método llamado cuando se selecciona un usuario en la lista. Actualiza el
+     * ComboBox con los entrenamientos disponibles para el usuario seleccionado.
+     *
+     * @param evt el evento que contiene la selección del usuario.
+     */
     private void jListShowUsersValueChanged(javax.swing.event.ListSelectionEvent evt) {
 
         Usuari selectedUsuari = jListShowUsers.getSelectedValue();
@@ -275,6 +313,13 @@ public class MainAfterLogin extends javax.swing.JPanel {
         jComboBoxShowWorkouts.setModel(model);
     }
 
+    /**
+     * Método llamado cuando se selecciona un entrenamiento en el ComboBox.
+     * Actualiza la interfaz con los detalles del entrenamiento seleccionado.
+     *
+     * @param evt el evento que contiene el estado de la selección del
+     * entrenamiento.
+     */
     private void jComboBoxShowWorkoutsItemStateChanged(ItemEvent evt) {
         jComboBoxDetails.addItem("-exercises-");
         if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
@@ -298,6 +343,10 @@ public class MainAfterLogin extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Muestra la lista de usuarios en el panel, actualizando la lista de
+     * usuarios.
+     */
     void showListOfUsers() {
 
         ArrayList<Usuari> usuaris = DataAccess.getAllUsersByInstructor(main.getId());
@@ -354,6 +403,10 @@ public class MainAfterLogin extends javax.swing.JPanel {
         });
     }
 
+    /**
+     * Establece el menú de la aplicación con las opciones disponibles. Incluye
+     * un botón para cerrar sesión.
+     */
     // Código generado con la ayuda de ChatGPT el 29 de enero de 2025.
     // Fuente: ChatGPT, OpenAI.
     private void setMenu() {
@@ -384,6 +437,9 @@ public class MainAfterLogin extends javax.swing.JPanel {
         menuBar.add(jMenu);
     }
 
+    /**
+     * Ajusta el tamaño de los paneles internos al redimensionar el panel.
+     */
     private void resizeInternalPanels() {
         int panelWidth = getWidth() - 470;
         int panelHeight = getHeight() - 110;
@@ -393,20 +449,37 @@ public class MainAfterLogin extends javax.swing.JPanel {
         createExercise.setBounds(455, 85, panelWidth, panelHeight);
     }
 
+    /**
+     * Regresa al panel de gestión de ejercicios, ocultando los otros paneles.
+     */
     public void goBackToManageExercises() {
         createExercise.setVisible(false);
         manageExercises.setVisible(true);
     }
 
+    /**
+     * Abre el panel con el icono y oculta el panel de creación de
+     * entrenamientos.
+     */
     public void createWorkout() {
         createWorkouts.setVisible(false);
         jLabelIcon.setVisible(true);
     }
 
+    /**
+     * Devuelve la etiqueta de bienvenida del instructor.
+     *
+     * @return la etiqueta de bienvenida.
+     */
     public JLabel getjLabelWelcomeNameOfInstructor() {
         return jLabelWelcomeNameOfInstructor;
     }
 
+    /**
+     * Establece la etiqueta de bienvenida del instructor.
+     *
+     * @param jLabelWelcomeNameOfInstructor la etiqueta de bienvenida.
+     */
     public void setjLabelWelcomeNameOfInstructor(javax.swing.JLabel jLabelWelcomeNameOfInstructor) {
         this.jLabelWelcomeNameOfInstructor = jLabelWelcomeNameOfInstructor;
     }

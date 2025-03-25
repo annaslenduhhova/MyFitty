@@ -23,6 +23,12 @@ import slenduhhova.myfitty.views.dialogviews.HelpDialog;
 import slenduhhova.myfitty.views.dialogviews.Login;
 
 /**
+ * La clase `Main` representa la ventana principal de la aplicación. Es una
+ * ventana que contiene los elementos necesarios para manejar la vista tanto
+ * antes como después de iniciar sesión. Esta clase también se encarga de la
+ * configuración del menú, la gestión de la interfaz de usuario y de la
+ * navegación entre diferentes vistas (como la pantalla de inicio de sesión y la
+ * pantalla principal después del inicio de sesión).
  *
  * @author annas
  */
@@ -35,6 +41,11 @@ public class Main extends javax.swing.JFrame {
     private HelpDialog helpMenu;
     private NewUser newUser;
 
+    /**
+     * Constructor de la clase `Main`. Inicializa la interfaz de usuario,
+     * configura el aspecto visual de la ventana y establece las vistas
+     * correspondientes para antes y después del inicio de sesión.
+     */
     public Main() {
 
         // Código generado con la ayuda de ChatGPT el 29 de enero de 2025.
@@ -82,6 +93,13 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cambia la vista de la interfaz de usuario de la pantalla de inicio de
+     * sesión a la pantalla principal después de iniciar sesión.
+     *
+     * @param name Nombre del instructor que se ha autenticado, se muestra en la
+     * pantalla de inicio.
+     */
     public void switchBeforeLoginToAfterLogin(String name) {
         mainBeforeLogin.setVisible(false);
         mainAfterLogin.getjLabelWelcomeNameOfInstructor().setText(name);
@@ -89,31 +107,66 @@ public class Main extends javax.swing.JFrame {
         mainAfterLogin.showListOfUsers();
     }
 
+    /**
+     * Devuelve la instancia de la clase `Login` asociada a esta clase `Main`.
+     *
+     * @return La instancia de la clase `Login`.
+     */
     public Login getLogin() {
         return login;
     }
 
+    /**
+     * Establece el ID del instructor que ha iniciado sesión.
+     *
+     * @param id ID del instructor.
+     */
     public void setId(int id) {
         idLoggedInstructor = id;
     }
 
+    /**
+     * Devuelve el ID del instructor que ha iniciado sesión.
+     *
+     * @return El ID del instructor.
+     */
     public int getId() {
         return idLoggedInstructor;
     }
 
+    /**
+     * Muestra el menú de ayuda en la interfaz de usuario. Se trata de una
+     * ventana emergente que contiene información sobre la aplicación.
+     */
     private void showAboutMenu() {
         helpMenu.setVisible(true);
     }
 
+    /**
+     * Configura la pantalla para cerrar sesión, ocultando la pantalla de la
+     * interfaz principal después del inicio de sesión y mostrando la pantalla
+     * anterior al inicio de sesión.
+     */
     public void setLogOut() {
         mainAfterLogin.setVisible(false);
         mainBeforeLogin.setVisible(true);
     }
 
+    /**
+     * Devuelve la instancia de la clase `NewUser` asociada a esta clase `Main`.
+     *
+     * @return La instancia de la clase `NewUser`.
+     */
     public NewUser getNewUser() {
         return newUser;
     }
 
+    /**
+     * Configura el menú de la aplicación, incluyendo las opciones de "Archivo"
+     * (con la opción de salir) y "Ayuda" (con la opción de "Acerca de"). Se
+     * añaden escuchadores de eventos para manejar las interacciones con estos
+     * elementos del menú.
+     */
     private void setMenu() {
         JMenuBar menuBar = new JMenuBar();
 
@@ -165,6 +218,11 @@ public class Main extends javax.swing.JFrame {
         setJMenuBar(menuBar);
     }
 
+    /**
+     * Método principal que inicia la aplicación.
+     *
+     * @param args Argumentos de la línea de comandos.
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

@@ -8,6 +8,13 @@ import java.net.URL;
 import slenduhhova.myfitty.views.dialogviews.DarkPattern;
 
 /**
+ * Clase que representa el panel que se muestra antes de que el usuario inicie
+ * sesión. Esta clase maneja la interfaz gráfica de la pantalla de inicio de
+ * sesión, donde el usuario puede acceder a la página de login o registrarse
+ * como nuevo usuario.
+ *
+ * La interfaz contiene elementos como un icono, un enlace a una página web, y
+ * botones para el login y el registro de usuario.
  *
  * @author annas
  */
@@ -16,6 +23,11 @@ public class MainBeforeLogin extends javax.swing.JPanel {
     private Main main;
     private DarkPattern darkPattern;
 
+    /**
+     * Constructor que inicializa la clase {@link MainBeforeLogin}.
+     *
+     * @param main la instancia principal de la aplicación.
+     */
     public MainBeforeLogin(Main main) {
         this.main = main;
         darkPattern = new DarkPattern(main);
@@ -91,11 +103,23 @@ public class MainBeforeLogin extends javax.swing.JPanel {
         jButtonRegisterUser.setBounds(120, 350, 140, 30);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que se ejecuta cuando el botón de "LOGIN" es presionado. Muestra
+     * el patrón oscuro y el panel de inicio de sesión.
+     *
+     * @param evt el evento del clic en el botón de login.
+     */
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         darkPattern.setVisible(true);
         main.getLogin().setVisible(true);
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
+    /**
+     * Método que se ejecuta cuando el enlace "www.fitty.com" es clicado. Abre
+     * la URL especificada en el navegador predeterminado.
+     *
+     * @param evt el evento del clic en el enlace.
+     */
     private void jLabelHyperlinkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHyperlinkMouseClicked
         try {
             Desktop.getDesktop().browse(new URL("https://paucasesnovescifp.cat/").toURI());
@@ -103,14 +127,32 @@ public class MainBeforeLogin extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jLabelHyperlinkMouseClicked
 
+    /**
+     * Método que cambia el estilo del texto del enlace cuando el cursor entra
+     * en la zona del enlace.
+     *
+     * @param evt el evento de mouseEntered sobre el enlace.
+     */
     private void jLabelHyperlinkMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHyperlinkMouseEntered
         jLabelHyperlink.setText("<html><a href='' style=\"color:#ef6c00;\">" + jLabelHyperlink.getText() + "</a></html>");
     }//GEN-LAST:event_jLabelHyperlinkMouseEntered
 
+    /**
+     * Método que restaura el texto original del enlace cuando el cursor sale de
+     * la zona del enlace.
+     *
+     * @param evt el evento de mouseExited sobre el enlace.
+     */
     private void jLabelHyperlinkMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHyperlinkMouseExited
         jLabelHyperlink.setText("www.fitty.com");
     }//GEN-LAST:event_jLabelHyperlinkMouseExited
 
+    /**
+     * Método que se ejecuta cuando el botón de "Register user" es presionado.
+     * Muestra la interfaz para registrar un nuevo usuario.
+     *
+     * @param evt el evento del clic en el botón de registrar usuario.
+     */
     private void jButtonRegisterUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterUserActionPerformed
         main.getNewUser().setVisible(true);
     }//GEN-LAST:event_jButtonRegisterUserActionPerformed

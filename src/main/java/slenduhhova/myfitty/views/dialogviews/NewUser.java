@@ -1,4 +1,3 @@
-
 package slenduhhova.myfitty.views.dialogviews;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
@@ -10,21 +9,30 @@ import slenduhhova.myfitty.dto.Usuari;
 import slenduhhova.myfitty.views.mainviews.Main;
 
 /**
+ * Clase que representa el cuadro de diálogo para registrar un nuevo usuario.
+ * Esta clase permite a un usuario ingresar su nombre, correo electrónico,
+ * contraseña y marcar si es instructor para registrarse en la aplicación.
  *
  * @author annas
  */
 public class NewUser extends javax.swing.JDialog {
 
     private Main main;
-    
+
+    /**
+     * Constructor de la clase NewUser. Inicializa el cuadro de diálogo para
+     * registrar un nuevo usuario.
+     *
+     * @param main La ventana principal de la aplicación.
+     */
     public NewUser(Main main) {
         super(main, true);
-        this.main=main;
+        this.main = main;
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("/images/icono.png")).getImage());
-        setSize(400,330);
-        setLocationRelativeTo(main); 
-        getContentPane().setBackground(new Color(240, 240, 240)); 
+        setSize(400, 330);
+        setLocationRelativeTo(main);
+        getContentPane().setBackground(new Color(240, 240, 240));
     }
 
     @SuppressWarnings("unchecked")
@@ -120,14 +128,17 @@ public class NewUser extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * Acción del botón de registro. Este método es invocado cuando el usuario
+     * hace clic en el botón de "Register" y se encarga de registrar al nuevo
+     * usuario en el sistema.
+     *
+     * @param evt El evento generado al hacer clic en el botón "Register".
+     */
     private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed
         registerUser();
     }//GEN-LAST:event_jButtonRegisterActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonRegister;
@@ -140,21 +151,30 @@ public class NewUser extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
+  
+    /**
+     * Método que registra al nuevo usuario en el sistema. Toma los datos
+     * ingresados en el formulario (nombre, correo electrónico, contraseña y si
+     * es instructor) y los guarda en la base de datos después de cifrar la
+     * contraseña.
+     */
+    private void registerUser() {
 
-    private void registerUser(){
-        
         Usuari usuari = new Usuari();
-        
+        // Establece los valores obtenidos desde los campos de entrada
         usuari.setNom(jTextFieldName.getText());
         usuari.setEmail(jTextFieldEmail.getText());
         usuari.setInstructor(jCheckBoxIsInstructor.isSelected());
-        
-        char[] password = jPasswordFieldPassword.getPassword();   
-        String passwordHash = BCrypt.withDefaults().hashToString(12, password);    
+
+        // Cifra la contraseña antes de almacenarla
+        char[] password = jPasswordFieldPassword.getPassword();
+        String passwordHash = BCrypt.withDefaults().hashToString(12, password);
         usuari.setPasswordHash(passwordHash);
-           
+
+        // Intentar registrar el usuario en la base de datos
         int newUserId = DataAccess.registerUser(usuari);
 
+        // Mostrar el resultado del registro
         if (newUserId > 0) {
             JOptionPane.showMessageDialog(this, "User is registered with ID: " + newUserId, "User", JOptionPane.PLAIN_MESSAGE);
         } else {
@@ -162,4 +182,3 @@ public class NewUser extends javax.swing.JDialog {
         }
     }
 }
-

@@ -4,6 +4,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.UIManager;
@@ -14,13 +15,26 @@ import slenduhhova.myfitty.dto.Usuari;
 import slenduhhova.myfitty.views.mainviews.Main;
 
 /**
+ * Clase que representa el cuadro de diálogo de inicio de sesión.
+ *
+ * Permite a los usuarios ingresar su correo electrónico y contraseña para
+ * autenticarse en la aplicación. También valida la entrada del email y
+ * proporciona retroalimentación visual.
  *
  * @author annas
  */
-public class Login extends javax.swing.JDialog {
+public class Login extends JDialog {
 
+    /**
+     * Referencia a la ventana principal de la aplicación.
+     */
     private Main main;
 
+    /**
+     * Constructor de la clase Login.
+     *
+     * @param main La ventana principal de la aplicación.
+     */
     public Login(Main main) {
         super(main, true);
         this.main = main;
@@ -169,6 +183,9 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldEmail;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Maneja el evento de inicio de sesión.
+     */
     public void jButtonEnter() {
         jProgressBarEnter.setVisible(true);
         jProgressBarEnter.setIndeterminate(true);

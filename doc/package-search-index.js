@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"slenduhhova.myfitty.dataaccess"},{"l":"slenduhhova.myfitty.dto"},{"l":"slenduhhova.myfitty.views.dialogviews"},{"l":"slenduhhova.myfitty.views.mainafterloginviews"},{"l":"slenduhhova.myfitty.views.mainviews"}];updateSearchResults();

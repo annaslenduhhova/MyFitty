@@ -19,6 +19,9 @@ import slenduhhova.myfitty.dto.Exercici;
 import slenduhhova.myfitty.views.mainviews.MainAfterLogin;
 
 /**
+ * Clase que permite crear un nuevo ejercicio en la aplicación. Esta clase
+ * proporciona una interfaz donde el usuario puede ingresar el nombre, la
+ * descripción y seleccionar una foto de vista previa para el ejercicio.
  *
  * @author annas
  */
@@ -28,6 +31,12 @@ public class CreateExercise extends javax.swing.JPanel {
     private JLabel jLabelPreviewPhoto; // Para mostrar una vista previa de la imagen seleccionada
     private File selectedFile; // Guardar la imagen seleccionada
 
+    /**
+     * Constructor de la clase CreateExercise. Inicializa los componentes
+     * gráficos y configura el comportamiento de la interfaz de usuario.
+     *
+     * @param mainAfterLogin La ventana principal después de iniciar sesión.
+     */
     public CreateExercise(MainAfterLogin mainAfterLogin) {
         this.mainAfterLogin = mainAfterLogin;
         initComponents();
@@ -42,12 +51,15 @@ public class CreateExercise extends javax.swing.JPanel {
         Image scaledDefaultImage = defaultIcon.getImage().getScaledInstance(55, 55, Image.SCALE_SMOOTH);
         jLabelPreviewPhoto.setIcon(new ImageIcon(scaledDefaultImage));
 
+        // Configura la acción para seleccionar una foto
         jButtonFoto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 choosePhoto();
             }
         });
+
+        // Configura el botón de "Create" como el botón predeterminado al recibir el enfoque
         jButtonFoto.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -163,6 +175,13 @@ public class CreateExercise extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción del botón de crear ejercicio. Este método es invocado cuando el
+     * usuario hace clic en el botón "Create" y se encarga de agregar el nuevo
+     * ejercicio con los datos proporcionados.
+     *
+     * @param evt El evento generado por el clic en el botón "Create".
+     */
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
         addNewExercise();
     }//GEN-LAST:event_jButtonCreateActionPerformed
@@ -179,8 +198,14 @@ public class CreateExercise extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Método para agregar un nuevo ejercicio al sistema. Se aseguran que todos
+     * los campos estén completados y se guarda la información del ejercicio,
+     * incluyendo la foto seleccionada, en la base de datos.
+     */
     private void addNewExercise() {
 
+        // Verifica que se haya seleccionado una foto
         if (selectedFile == null) {
             JOptionPane.showMessageDialog(this, "Please select a photo.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -188,10 +213,12 @@ public class CreateExercise extends javax.swing.JPanel {
 
         Exercici exercici = new Exercici();
 
+        // Establece los valores ingresados para el nuevo ejercicio
         exercici.setNomExercici(jTextFieldName.getText());
         exercici.setDescripcio(jTextFieldDescription.getText());
         exercici.setDemoFoto(selectedFile.getAbsolutePath());
 
+        // Intenta agregar el ejercicio a la base de datos
         try {
             int idNewExercise = DataAccess.addNewExercise(exercici);
             exercici.setId(idNewExercise);
@@ -201,12 +228,17 @@ public class CreateExercise extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Configura el diseño de los componentes en el panel utilizando el layout
+     * personalizado.
+     */
     // Código generado con la ayuda de ChatGPT el 27 de enero de 2025.
     // Fuente: ChatGPT, OpenAI.
     private void setupLayout() {
 
         setLayout(new MigLayout("wrap 2", "[align right][grow,fill]", "[]20[]15[]15[]20[]20[]"));
 
+        // Añade los componentes al panel
         add(jLabelNewExercise, "span 2, center, gaptop 25");
         add(jLabelName);
         add(jTextFieldName, "growx, growy, hmin 25, wmin 100, wmax 900");
@@ -219,6 +251,10 @@ public class CreateExercise extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Abre un cuadro de diálogo para seleccionar una foto desde el sistema de
+     * archivos.
+     */
     private void choosePhoto() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
@@ -232,6 +268,11 @@ public class CreateExercise extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Actualiza la vista previa de la foto seleccionada.
+     *
+     * @param file El archivo de imagen seleccionado.
+     */
     private void updatePhotoPreview(File file) {
         if (file != null) {
             try {
