@@ -29,5 +29,21 @@ No sabía como cargar una imagen en el archivo Readme.md, he usado el video del 
 # Javadoc generation
 Intenté de muchas maneras modificar la configuración del plugin Maven para Javadoc, agregando <outputDirectory>${project.basedir}/doc</outputDirectory>, pero no funcionaba. Finalmente, encontré una solución copiando directamente la carpeta apidocs desde /target/reports a /docs.
 
-Hice un commit con esta solución, pero después de seguir probando, descubrí que era posible generar el Javadoc automáticamente al hacer "Build" del proyecto. Para lograrlo, no solo agregué "<outputDirectory>${project.basedir}/doc</outputDirectory>", sino también la siguiente configuración en el pom.xml en el Maven Plugin: <execution><id>generate-javadoc</id><phase>package</phase><goals><goal>javadoc</goal></goals></execution>. 
+Hice un commit con esta solución, pero después de seguir probando, descubrí que era posible generar el Javadoc automáticamente al hacer "Build" del proyecto. Para lograrlo, no solo agregué 
+
+```xml
+<outputDirectory>${project.basedir}/doc</outputDirectory>
+```
+,sino también la siguiente configuración en el pom.xml en el Maven Plugin:
+
+```xml
+<execution>
+    <id>generate-javadoc</id>
+    <phase>package</phase>
+    <goals>
+        <goal>javadoc</goal>
+    </goals>
+</execution>
+```
+
 Con este código, el Javadoc se genera directamente en la carpeta /doc cuando se ejecuta "Build".
