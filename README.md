@@ -26,7 +26,13 @@ No sabía como cargar una imagen en el archivo Readme.md, he usado el video del 
 - He modificado mi CalendarComponent de la tarea anterior y he creado un nuevo componente llamado MyCalendar, que he usado en la vista CreateWorkouts. Cuando se hace clic en el botón jButtonCalendario, se abre mi calendario, donde se puede elegir la fecha de un entrenamiento.
 - He añadido dos ToolTips en la vista CreateWorkouts: el primero para el calendario y el segundo para el jListExercises, explicando que para seleccionar múltiples ejercicios, el usuario debe presionar la tecla Ctrl.
 
-# Javadoc generation
+### Add MyCalendar Component
+Para añadir el componente MyCalendar al proyecto hay que descargar primero el .jar del componente desde Releases del repositorio actual. Después abrir el proyecto en un IDE y agregar el .jar. Por ejemplo, en Netbeans hay que: 
+  - hacer clic en Dependencies del proyecto
+  - elegir el componente, hacer el clic derecho el componente, elegir la opción "Manually install artifact"
+  - en la ventana aparecida elegir el .jar descargado y hacer clic en "Install locally"
+
+## Javadoc generation
 Intenté de muchas maneras modificar la configuración del plugin Maven para Javadoc, agregando <outputDirectory>${project.basedir}/doc</outputDirectory>, pero no funcionaba. Finalmente, encontré una solución copiando directamente la carpeta apidocs desde /target/reports a /docs.
 
 Hice un commit con esta solución, pero después de seguir probando, descubrí que era posible generar el Javadoc automáticamente al hacer "Build" del proyecto. Para lograrlo, no solo agregué 
