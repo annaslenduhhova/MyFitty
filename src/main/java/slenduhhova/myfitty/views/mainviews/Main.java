@@ -3,11 +3,14 @@ package slenduhhova.myfitty.views.mainviews;
 import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
 import java.awt.AWTKeyStroke;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.ImageIcon;
@@ -213,10 +216,55 @@ public class Main extends javax.swing.JFrame {
                 showAboutMenu();
             }
         });
+        
+        JMenuItem apiDocMenuItem = new JMenuItem("API Docs");
+        apiDocMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                HelpOpener.openApiDocs();
+            }
+        });
+        
+        JMenuItem userManualMenuItem = new JMenuItem("User Manual");
+        userManualMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                HelpOpener.openUserManual();
+            }
+        });
+        
         jMenuHelp.add(aboutMenuItem);
+        jMenuHelp.add(apiDocMenuItem);
+        jMenuHelp.add(userManualMenuItem);
         menuBar.add(jMenuHelp);
         setJMenuBar(menuBar);
     }
+    
+    public class HelpOpener {
+
+    private static final String APP_NAME = "MyFitty"; 
+
+    public static void openApiDocs() {
+        String path = System.getProperty("user.home") + "\\AppData\\Local\\" + APP_NAME + "\\docs\\apidocs\\index.html";
+        openFile(path);
+    }
+
+    public static void openUserManual() {
+        String path = System.getProperty("user.home") + "\\AppData\\Local\\" + APP_NAME + "\\docs\\user_manual.pdf";
+        openFile(path);
+    }
+
+    private static void openFile(String filePath) {
+        try {
+            File file = new File(filePath);
+            if (file.exists() && Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(file);
+            } else {
+                System.out.println("No se encontró el archivo: " + filePath);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
 
     /**
      * Método principal que inicia la aplicación.

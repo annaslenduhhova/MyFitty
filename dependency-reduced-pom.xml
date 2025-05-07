@@ -16,6 +16,7 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <finalName>MyFitty-shaded</finalName>
               <filters>
                 <filter>
                   <artifact>*:*</artifact>
@@ -26,6 +27,11 @@
                   </excludes>
                 </filter>
               </filters>
+              <transformers>
+                <transformer>
+                  <mainClass>slenduhhova.myfitty.views.mainviews.Main</mainClass>
+                </transformer>
+              </transformers>
             </configuration>
           </execution>
         </executions>
